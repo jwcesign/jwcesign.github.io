@@ -2,752 +2,324 @@
 <search>
   
     <entry>
-      <title>Next Theme Tutorial</title>
-      <url>/tutorial/2017/07/20/next-tutorial/</url>
+      <title>sublime text 3安装</title>
+      <url>/%E5%B7%A5%E5%85%B7/2018/06/09/sublime/</url>
       <content type="text">
-  NexT is a high quality elegant Jekyll theme ported from Hexo Next. It is crafted from scratch, with love.
+  “sublime text 3安装“
 
 
+问题
 
+sublime text 3 mac下的安装，
 
-Live Preview
+软件下载
 
-Screenshots
+去百度云或者官网
 
+修改host文件
 
-  
-    Desktop
+vim /etc/hosts
+//加入下面的类容
+127.0.0.1       www.sublimetext.com
+127.0.0.1       license.sublimehq.com
 
-  
-  
-    Sidebar
-  
 
+输入key
 
+----- BEGIN LICENSE -----
+sgbteam
+Single User License
+EA7E-1153259
+8891CBB9 F1513E4F 1A3405C1 A865D53F
+115F202E 7B91AB2D 0D2A40ED 352B269B
+76E84F0B CD69BFC7 59F2DFEF E267328F
+215652A3 E88F9D8F 4C38E3BA 5B2DAAE4
+969624E7 DC9CD4D5 717FB40C 1B9738CF
+20B3C4F1 E917B5B3 87C38D9C ACCE7DD8
+5F7EF854 86B9743C FADC04AA FB0DA5C0
+F913BE58 42FEA319 F954EFDD AE881E0B
+------ END LICENSE ------
 
 
 
-  Sidebar (Post details page)
+安装package control
 
+ctrl+` 后输入
+import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
 
 
 
+安装插件
 
-  Mobile
+markdown插件
+MarkdownEditing: 修改用户设置(GFM)，修改为下列配置文件（先把default复制到user）
+// Layout
+&quot;draw_centered&quot;: true,
+&quot;word_wrap&quot;: true,
+&quot;wrap_width&quot;: 120,
+&quot;rulers&quot;: [],
 
 
 
+MarkdownPreview: 配合上一个插件用
 
-Installation
+格式化代码相关
+CodeFormatter: 格式化代码，有几种语言不支持
+CoolFormat: 格式化代码
+Alignment：自动对齐插件
 
-Check whether you have Ruby 2.1.0 or higher installed:
+注释相关
+DocBlockr：可以快速注释
 
-ruby --version
+补全相关
+All Autocomplete: 这个插件扩展了其自动完成的单词列表到所有打开的文件
 
+辅助阅读
+BracketHighlighter: 类似于代码匹配，可以匹配括号，引号等符号内的范围。对代码阅读很有帮助。
 
+文件比对
 
-Install Bundler:
+git相关
+Git:  这个插件会将Git整合进你的SublimeText，使的你可以在SublimeText中运行Git命令，包括添加，提交文件，查看日志，文件注解以及其它Git功能。
+GitGutter: 这是个十分有用的插件，它会在你最后一次提交Git后显示出有哪些行是被改动过的。
 
-gem install bundler
+go相关
+gosublime: go语言格式化等
 
+目录树相关
+SideBarEnhancements：可以大大加强在侧栏目录树中右键的选项
 
-
-Clone Jacman theme:
-
-git clone https://github.com/Simpleyyt/jekyll-theme-next.git
-cd jekyll-theme-next
-
-
-
-Install Jekyll and other dependencies from the GitHub Pages gem:
-
-bundle install
-
-
-
-Run your Jekyll site locally:
-
-bundle exec jekyll server
-
-
-
-More Details：Setting up your GitHub Pages site locally with Jekyll
-
-Features
-
-Multiple languages support, including: English / Russian / French / German / Simplified Chinese / Traditional Chinese.
-
-Default language is English.
-
-language: en
-# language: zh-Hans
-# language: fr-FR
-# language: zh-hk
-# language: zh-tw
-# language: ru
-# language: de
-
-
-
-Set language field as following in site _config.yml to change to Chinese.
-
-language: zh-Hans
-
-
-
-Comment support.
-
-NexT has native support for DuoShuo and Disqus comment systems.
-
-Add the following snippets to your _config.yml:
-
-duoshuo:
-  enable: true
-  shortname: your-duoshuo-shortname
-
-
-
-OR
-
-disqus_shortname: your-disqus-shortname
-
-
-
-Social Media
-
-NexT can automatically add links to your Social Media accounts:
-
-social:
-  GitHub: your-github-url
-  Twitter: your-twitter-url
-  Weibo: your-weibo-url
-  DouBan: your-douban-url
-  ZhiHu: your-zhihu-url
-
-
-
-Feed link.
-
-
-  Show a feed link.
-
-
-Set rss field in theme’s _config.yml, as the following value:
-
-
-  rss: false will totally disable feed link.
-  
-    rss:   use sites’ feed link. This is the default option.
-
-    Follow the installation instruction in the plugin’s README. After the configuration is done for this plugin, the feed link is ready too.
-  
-  rss: http://your-feed-url set specific feed link.
-
-
-Up to 5 code highlight themes built-in.
-
-NexT uses Tomorrow Theme with 5 themes for you to choose from.
-Next use normal by default. Have a preview about normal and night:
-
-
-
-
-Head over to Tomorrow Theme for more details.
-
-Configuration
-
-NexT comes with few configurations.
-
-
-# Menu configuration.
-menu:
-  home: /
-  archives: /archives
-
-# Favicon
-favicon: /favicon.ico
-
-# Avatar (put the image into next/source/images/)
-# can be any image format supported by web browsers (JPEG,PNG,GIF,SVG,..)
-avatar: /default_avatar.png
-
-# Code highlight theme
-# available: normal | night | night eighties | night blue | night bright
-highlight_theme: normal
-
-# Fancybox for image gallery
-fancybox: true
-
-# Specify the date when the site was setup
-since: 2013
-
-
-
-
-Browser support
-
-
+—— cesign 后记于 2018.06
 </content>
       <categories>
         
-          <category> tutorial </category>
+          <category> 工具 </category>
         
       </categories>
       <tags>
+        
+          <tag> 工具 </tag>
         
       </tags>
       <tags></tags>
     </entry>
   
     <entry>
-      <title>Highlight Test</title>
-      <url>/test/2017/07/19/highlight-test/</url>
-      <content type="text">This is a highlight test.
-
-Normal block
-
-alert('Hello World!');
+      <title>k8s架构</title>
+      <url>/k8s/2018/06/06/k8s/</url>
+      <content type="text">
+  “k8s架构相关“
 
 
+问题
 
-print 'helloworld'
+最近在学习k8s，感觉学得很迷，打算弄清楚k8s的系统架构
 
+组件(主要从master与node来说)
+先来一张图解
 
+从图中可以发现Master节点主要有etcd,kube-controller,kube-apiserver,kube-scheduler; Node包括kubelet和kube-proxy
 
-Highlight block
-
-alert( 'Hello, world!' );
-
-
-
-print 'helloworld'
-
-
-
-def foo
-  puts 'foo'
-end
-
-
-
-def foo
-  puts 'foo'
-end
-
-1
-2
-3def foo
-  puts 'foo'
-end
-
-
-#include &amp;lt;iostream&amp;gt;
-
-using namespace std;
-
-void foo(int arg1, int arg2)
-{
-
-}
-
-int main()
-{
-  string str;
-  foo(1, 2);
-  cout &amp;lt;&amp;lt; &quot;Hello World&quot; &amp;lt;&amp;lt; endl;
-  return 0;
-}
-
+详情请点击
 
 </content>
       <categories>
         
-          <category> Test </category>
+          <category> k8s </category>
         
       </categories>
       <tags>
+        
+          <tag> 学习 </tag>
         
       </tags>
       <tags></tags>
     </entry>
   
     <entry>
-      <title>Emoji Test</title>
-      <url>/2015/09/19/emoji-test/</url>
-      <content type="text">This is an emoji test. :smile: lol.
+      <title>Docker入门</title>
+      <url>/2018/03/30/docker_learn/</url>
+      <content type="text">
+  “Docker学习”
 
-See emoji cheat sheet for more detail :wink: : https://www.webpagefx.com/tools/emoji-cheat-sheet/.
 
-:bowtie::smile::laughing::blush::smiley::relaxed::smirk:
-:heart_eyes::kissing_heart::kissing_closed_eyes::flushed::relieved::satisfied::grin:
+Docker介绍
+Docker是一个开源的引擎，可以轻松的为任何应用创建一个轻量级的、可移植的、自给自足的容器。开发者在笔记本上编译测试通过的容器可以批量地在生产环境中部署，包括VMs（虚拟机）、bare metal、OpenStack 集群和其他的基础应用平台。
+Docker原理
+Docker原理介绍：link
+
+Docker安装
+apt-get install docker
+apt-get install docker.io
+
+
+选择仓库（记得重启）
+vim /etc/docker/daemon.json
+{ &quot;registry-mirrors&quot;:[&quot;http://hub-mirror.c.163.com&quot;]}
+
+
+基础命令
+查看版本
+docker --version
+
+
+搜索可用镜像
+docker search image_words
+
+
+拉取镜像
+docker pull image_name
+
+
+删除镜像
+//可能需要先停止并删除正在运行的容器
+docker rmi image_id
+//错误:image is referenced in multiple repositories
+docker rmi respository_name
+
+
+在容器中运行命令
+docker run image_name cmd
+
+
+查看所有容器
+docker ps -a
+
+
+查看运行中的容器
+docker ps
+
+
+删除容器
+docker rm con_id
+//删除所有
+docker rm $(docker ps -aq)
+
+
+在容器中安装程序
+docker run image_name apt-get install software
+
+
+保存对容器的修改（镜像）
+//先查看容器ID
+docker ps -l
+//保存
+docker commit id_start user/des_or_keyword
+
+
+把保存的镜像上传到docker hub
+docker tag image_name user_name/res_name
+docker push user_name/res_name
+
+
+检查运行中的镜像
+//查看运行中的容器
+docker ps
+//查看容器的详细信息
+docker inspect con_id
+
+
+—— cesign 后记于 2018.03
 </content>
       <categories>
         
       </categories>
       <tags>
+        
+          <tag> Docker </tag>
         
       </tags>
       <tags></tags>
     </entry>
   
     <entry>
-      <title>Gallery Post</title>
-      <url>/photo/2014/11/18/gallery-post/</url>
-      <content type="text">Nunc dignissim volutpat enim, non sollicitudin purus dignissim id. Nam sit amet urna eu velit lacinia eleifend. Proin auctor rhoncus ligula nec aliquet. Donec sodales molestie lacinia. Curabitur dictum faucibus urna at convallis. Aliquam in lectus at urna rutrum porta. In lacus arcu, molestie ut vestibulum ut, rhoncus sed eros. Sed et elit vitae risus pretium consectetur vel in mi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempus turpis quis lectus rhoncus adipiscing. Proin pulvinar placerat suscipit. Maecenas imperdiet, quam vitae varius auctor, enim mauris vulputate sapien, nec laoreet neque diam non quam.
+      <title>ssh实现内网穿透</title>
+      <url>/lan/2018/03/05/ssh%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</url>
+      <content type="text">
+  “python安装问题”
 
 
+问题
+
+A主机为公网IP，B，C主机为内网IP，现在需要B连接C主机。
+
+实现(命令)
+对于服务器A:
+#生成密钥，并复制到C（实现免密登陆）
+&amp;gt;ssh-keygen
+#复制通过scp
+#在C上输入
+&amp;gt;scp username@addr:~/.ssh/id_rsa.pub
+&amp;gt;cat id_rsa.pub &amp;gt;&amp;gt; ~/.ssh/authorized_keys
 
 
+对于C
+#把远程的6766端口映射到本地22端口
+&amp;gt;autossh -p 22 -M 6777 -NR '*:6766:127.0.0.1:22' username@addr
 
-Etiam luctus mauris at mi sollicitudin quis malesuada nibh porttitor. Vestibulum non dapibus magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin feugiat hendrerit viverra. Phasellus sit amet nunc mauris, eu ultricies tellus. Sed a mi tortor, eleifend varius erat. Proin consectetur molestie tortor eu gravida. Cras placerat orci id arcu tristique ut rutrum justo pulvinar. Maecenas lacinia fringilla diam non bibendum. Aenean vel viverra turpis. Integer ut leo nisi. Pellentesque vehicula quam ut sapien convallis consequat. Aliquam ut arcu purus, eget tempor purus. Integer eu tellus quis erat tristique gravida eu vel lorem.
+
+然后在A上执行
+#编辑/etc/ssh/sshd_config,加入 GatewayPorts yes
+#重启sshd, service sshd restart
+#实现B登陆到C
+&amp;gt;ssh -p 6777 userb@addr
+
+
+实现80端口也一样的
+
+—— cesign 后记于 2018.03
 </content>
       <categories>
         
-          <category> Photo </category>
+          <category> lan </category>
         
       </categories>
       <tags>
         
-          <tag> consectetur </tag>
+          <tag> 杂 </tag>
         
       </tags>
       <tags></tags>
     </entry>
   
     <entry>
-      <title>MathJax with Jekyll</title>
-      <url>/opinion/2014/02/16/Mathjax-with-jekyll/</url>
-      <content type="text">One of the rewards of switching my website to Jekyll is the
-ability to support MathJax, which means I can write LaTeX-like equations that get
-nicely displayed in a web browser, like this one \( \sqrt{\frac{n!}{k!(n-k)!}} \) or
-this one \( x^2 + y^2 = r^2 \).
+      <title>Python2与python3兼容于pip同时兼容</title>
+      <url>/%E5%B7%A5%E5%85%B7/2018/03/05/python2-3-install-together/</url>
+      <content type="text">
+  “python安装问题”
+
+
+问题
+
+安装python2于python3的pip在同一系统。
+
+环境：
+
+  系统 windows
+
+
+实现(命令)
+#python2
+&amp;gt; py -2 -m pip install bs4
+#python3
+&amp;gt; py -3 -m pip install bs4
+# 启用python2(3)
+&amp;gt; py -2 (-3)
 
 
 
-
-
-What’s MathJax?
-
-If you check MathJax website (www.mathjax.org) you’ll see
-that it is an open source JavaScript display engine for mathematics that works in all
-browsers.
-
-How to implement MathJax with Jekyll
-
-I followed the instructions described by Dason Kurkiewicz for
-using Jekyll and Mathjax.
-
-Here are some important details. I had to modify the Ruby library for Markdown in
-my _config.yml file. Now I’m using redcarpet so the corresponding line in the
-configuration file is: markdown: redcarpet
-
-To load the MathJax javascript, I added the following lines in my layout page.html
-(located in my folder _layouts)
-
-&amp;lt;script type=&quot;text/javascript&quot;
-    src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&amp;gt;
-&amp;lt;/script&amp;gt;
-
-Of course you can choose a different file location in your jekyll layouts.
-
-A Couple of Examples
-
-Here’s a short list of examples. To know more about the details behind MathJax, you can
-always checked the provided documentation available at
-http://docs.mathjax.org/en/latest/
-
-I’m assuming you are familiar with LaTeX. However, you should know that MathJax does not
-have the exactly same behavior as LaTeX. By default, the tex2jax preprocessor defines the
-LaTeX math delimiters, which are \\(...\\) for in-line math, and \\[...\\] for
-displayed equations. It also defines the TeX delimiters $$...$$ for displayed
-equations, but it does not define $...$ as in-line math delimiters. Fortunately,
-you can change these predefined specifications if you want to do so.
-
-Let’s try a first example. Here’s a dummy equation:
-
-
-
-How do you write such expression? Very simple: using double dollar signs
-
-$$a^2 + b^2 = c^2$$
-
-To display inline math use \\( ... \\) like this \\( sin(x^2) \\) which gets
-rendered as \( sin(x^2) \)
-
-Here’s another example using type \mathsf
-
-$$ \mathsf{Data = PCs} \times \mathsf{Loadings} $$
-
-which gets displayed as
-
-
-
-Or even better:
-
-\\[ \mathbf{X} = \mathbf{Z} \mathbf{P^\mathsf{T}} \\]
-
-is displayed as
-
-\[ \mathbf{X} = \mathbf{Z} \mathbf{P^\mathsf{T}} \]
-
-If you want to use subscripts like this \( \mathbf{X}_{n,p} \) you need to scape the
-underscores with a backslash like so \mathbf{X}\_{n,p}:
-
-$$ \mathbf{X}\_{n,p} = \mathbf{A}\_{n,k} \mathbf{B}\_{k,p} $$
-
-will be displayed as
-
-\[ \mathbf{X}_{n,p} = \mathbf{A}_{n,k} \mathbf{B}_{k,p} \]
-</content>
-      <categories>
-        
-          <category> opinion </category>
-        
-      </categories>
-      <tags>
-        
-          <tag> resources </tag>
-        
-          <tag> jekyll </tag>
-        
-      </tags>
-      <tags></tags>
-    </entry>
-  
-    <entry>
-      <title>Images</title>
-      <url>/2013/12/27/images/</url>
-      <content type="text">This is a image test post.
-
-
-
-
-
-
-
+后记
+快速积累
 
 </content>
       <categories>
         
-      </categories>
-      <tags>
-        
-      </tags>
-      <tags></tags>
-    </entry>
-  
-    <entry>
-      <title>Excerpts</title>
-      <url>/2013/12/25/excerpts/</url>
-      <content type="text">The following contents should be invisible in home/archive page.
-
-
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget urna vitae velit eleifend interdum at ac nisi. In nec ligula lacus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed eu cursus erat, ut dapibus quam. Aliquam eleifend dolor vitae libero pharetra adipiscing. Etiam adipiscing dolor a quam tempor, eu convallis nulla varius. Aliquam sollicitudin risus a porta aliquam. Ut nec velit dolor. Proin eget leo lobortis, aliquam est sed, mollis mauris. Fusce vitae leo pretium massa accumsan condimentum. Fusce malesuada gravida lectus vel vulputate. Donec bibendum porta nibh ut aliquam.
-
-Sed lorem felis, congue non fringilla eu, aliquam eu eros. Curabitur orci libero, mollis sed semper vitae, adipiscing in lectus. Aenean non egestas odio. Donec sollicitudin nisi quis lorem gravida, in pharetra mauris fringilla. Duis sit amet faucibus dolor, id aliquam neque. In egestas, odio gravida tempor dictum, mauris felis faucibus purus, sit amet commodo lacus diam vitae est. Ut ut quam eget massa semper sodales. Aenean non ipsum cursus, blandit lectus in, ornare odio. Curabitur ultrices porttitor vulputate.
-</content>
-      <categories>
+          <category> 工具 </category>
         
       </categories>
       <tags>
         
-      </tags>
-      <tags></tags>
-    </entry>
-  
-    <entry>
-      <title>Block</title>
-      <url>/foo/2013/12/25/block/</url>
-      <content type="text">This post is used for testing tag plugins. See docs for more info.
-
-Block Quote
-
-Normal blockquote
-
-
-  Praesent diam elit, interdum ut pulvinar placerat, imperdiet at magna.
-
-
-Code Block
-
-Inline code block
-
-This is a inline code block: python, print 'helloworld'.
-
-Normal code block
-
-alert('Hello World!');
-
-
-
-print &quot;Hello world&quot;
-
-
-
-Highlight code block
-
-print &quot;Hello world&quot;
-
-
-
-def foo
-  puts 'foo'
-end
-
-1
-2
-3def foo
-  puts 'foo'
-end
-
-
-Gist
-
-
-
-</content>
-      <categories>
-        
-          <category> Foo </category>
-        
-      </categories>
-      <tags>
-        
-      </tags>
-      <tags></tags>
-    </entry>
-  
-    <entry>
-      <title>日本語テスト</title>
-      <url>/2013/12/25/%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%83%86%E3%82%B9%E3%83%88/</url>
-      <content type="text">This is a Japanese test post.
-
-私は昨日ついにその助力家というのの上よりするたなけれ。
-
-最も今をお話団はちょうどこの前後なかろでくらいに困りがいるたをは帰着考えたなかって、そうにもするでうたらない。
-
-がたを知っないはずも同時に九月をいよいよたありた。
-
-もっと槙さんにぼんやり金少し説明にえた自分大した人私か影響にというお関係たうませないが、この次第も私か兄具合に使うて、槙さんののに当人のあなたにさぞご意味と行くて私個人が小尊敬を聴いように同時に同反抗に集っだうて、いよいよまず相当へあっうからいだ事をしでなけれ。
-
-
-  それでそれでもご時日をしはずはたったいやと突き抜けるますて、その元がは行ったてという獄を尽すていけですた。
-
-
-この中道具の日その学校はあなたごろがすまなりかとネルソンさんの考えるですん、辺の事実ないというご盲従ありたですと、爺さんのためが薬缶が結果までの箸の当時してならて、多少の十月にためからそういう上からとにかくしましないと触れべきものたで、ないうですと多少お人達したのでたた。
-
-From すぐ使えるダミーテキスト - 日本語 Lorem ipsum
-</content>
-      <categories>
-        
-      </categories>
-      <tags>
-        
-      </tags>
-      <tags></tags>
-    </entry>
-  
-    <entry>
-      <title>中文測試</title>
-      <url>/test/test/2013/12/25/%E4%B8%AD%E6%96%87%E6%B8%AC%E8%A9%A6/</url>
-      <content type="text">This is a Chinese test post.
-
-善我王上魚、產生資西員合兒臉趣論。畫衣生這著爸毛親可時，安程幾？合學作。觀經而作建。都非子作這！法如言子你關！手師也。
-
-以也座論頭室業放。要車時地變此親不老高小是統習直麼調未，行年香一？
-
-就竟在，是我童示讓利分和異種百路關母信過明驗有個歷洋中前合著區亮風值新底車有正結，進快保的行戰從：弟除文辦條國備當來際年每小腳識世可的的外的廣下歌洲保輪市果底天影；全氣具些回童但倒影發狀在示，數上學大法很，如要我……月品大供這起服滿老？應學傳者國：山式排只不之然清同關；細車是！停屋常間又，資畫領生，相們制在？公別的人寫教資夠。資再我我！只臉夫藝量不路政吃息緊回力之；兒足灣電空時局我怎初安。意今一子區首者微陸現際安除發連由子由而走學體區園我車當會，經時取頭，嚴了新科同？很夫營動通打，出和導一樂，查旅他。坐是收外子發物北看蘭戰坐車身做可來。道就學務。
-
-國新故。
-
-
-  工步他始能詩的，裝進分星海演意學值例道……於財型目古香亮自和這乎？化經溫詩。只賽嚴大一主價世哥受的沒有中年即病行金拉麼河。主小路了種就小為廣不？
-
-
-From 亂數假文產生器 - Chinese Lorem Ipsum
-</content>
-      <categories>
-        
-          <category> test/test </category>
-        
-      </categories>
-      <tags>
-        
-      </tags>
-      <tags></tags>
-    </entry>
-  
-    <entry>
-      <title>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam justo turpis, tincidunt ac convallis id.</title>
-      <url>/foo/2013/12/25/long-title/</url>
-      <content type="text">This post has a long title. Make sure the title displayed right.
-</content>
-      <categories>
-        
-          <category> Foo </category>
-        
-      </categories>
-      <tags>
-        
-          <tag> Foo </tag>
-        
-      </tags>
-      <tags></tags>
-    </entry>
-  
-    <entry>
-      <title>Categories</title>
-      <url>/foo/bar/baz/2013/12/25/categories/</url>
-      <content type="text">This post contains 3 categories. Make sure your theme can display all of the categories.
-</content>
-      <categories>
-        
-          <category> Foo </category>
-        
-          <category> Bar </category>
-        
-          <category> Baz </category>
-        
-      </categories>
-      <tags>
-        
-      </tags>
-      <tags></tags>
-    </entry>
-  
-    <entry>
-      <title>Link Post</title>
-      <url>/foo/2013/12/25/link-post/</url>
-      <content type="text">This is a link post. Clicking on the link should open Google in a new tab or window.
-</content>
-      <categories>
-        
-          <category> Foo </category>
-        
-      </categories>
-      <tags>
-        
-      </tags>
-      <tags></tags>
-    </entry>
-  
-    <entry>
-      <title>Tags</title>
-      <url>/foo/2013/12/25/tags/</url>
-      <content type="text">This post contains 3 tags. Make sure your theme can display all of the tags.
-</content>
-      <categories>
-        
-          <category> Foo </category>
-        
-      </categories>
-      <tags>
-        
-          <tag> Foo </tag>
-        
-          <tag> Bar </tag>
-        
-          <tag> Baz </tag>
-        
-      </tags>
-      <tags></tags>
-    </entry>
-  
-    <entry>
-      <title>Elements</title>
-      <url>/foo/2013/12/25/elements/</url>
-      <content type="text">The purpose of this post is to help you make sure all of HTML elements can display properly. If you use CSS reset, don’t forget to redefine the style by yourself.
-
-
-
-Heading 1
-
-Heading 2
-
-Heading 3
-
-Heading 4
-
-Heading 5
-
-Heading 6
-
-
-
-Paragraph
-
-Lorem ipsum dolor sit amet, test link consectetur adipiscing elit. Strong text pellentesque ligula commodo viverra vehicula. Italic text at ullamcorper enim. Morbi a euismod nibh. Underline text non elit nisl. Deleted text tristique, sem id condimentum tempus, metus lectus venenatis mauris, sit amet semper lorem felis a eros. Fusce egestas nibh at sagittis auctor. Sed ultricies ac arcu quis molestie. Donec dapibus nunc in nibh egestas, vitae volutpat sem iaculis. Curabitur sem tellus, elementum nec quam id, fermentum laoreet mi. Ut mollis ullamcorper turpis, vitae facilisis velit ultricies sit amet. Etiam laoreet dui odio, id tempus justo tincidunt id. Phasellus scelerisque nunc sed nunc ultricies accumsan.
-
-Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed erat diam, blandit eget felis aliquam, rhoncus varius urna. Donec tellus sapien, sodales eget ante vitae, feugiat ullamcorper urna. Praesent auctor dui vitae dapibus eleifend. Proin viverra mollis neque, ut ullamcorper elit posuere eget.
-
-
-  Praesent diam elit, interdum ut pulvinar placerat, imperdiet at magna.
-
-
-Maecenas ornare arcu at mi suscipit, non molestie tortor ultrices. Aenean convallis, diam et congue ultricies, erat magna tincidunt orci, pulvinar posuere mi sapien ac magna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent vitae placerat mauris. Nullam laoreet ante posuere tortor blandit auctor. Sed id ligula volutpat leo consequat placerat. Mauris fermentum dolor sed augue malesuada sollicitudin. Vivamus ultrices nunc felis, quis viverra orci eleifend ut. Donec et quam id urna cursus posuere. Donec elementum scelerisque laoreet.
-
-List Types
-
-Definition List (dl)
-
-Definition List TitleThis is a definition list division.
-
-Ordered List (ol)
-
-
-  List Item 1
-  List Item 2
-  List Item 3
-
-
-Unordered List (ul)
-
-
-  List Item 1
-  List Item 2
-  List Item 3
-
-
-Table
-
-
-  
-    
-      Table Header 1
-      Table Header 2
-      Table Header 3
-    
-  
-  
-    
-      Division 1
-      Division 2
-      Division 3
-    
-    
-      Division 1
-      Division 2
-      Division 3
-    
-    
-      Division 1
-      Division 2
-      Division 3
-    
-  
-
-
-Misc Stuff - abbr, acronym, sub, sup, etc.
-
-Lorem superscript dolor subscript amet, consectetuer adipiscing elit. Nullam dignissim convallis est. Quisque aliquam. cite. Nunc iaculis suscipit dui. Nam sit amet sem. Aliquam libero nisi, imperdiet at, tincidunt nec, gravida vehicula, nisl. Praesent mattis, massa quis luctus fermentum, turpis mi volutpat justo, eu volutpat enim diam eget metus. Maecenas ornare tortor. Donec sed tellus eget sapien fringilla nonummy. NBA Mauris a ante. Suspendisse quam sem, consequat at, commodo vitae, feugiat in, nunc. Morbi imperdiet augue quis tellus.  AVE
-</content>
-      <categories>
-        
-          <category> Foo </category>
-        
-      </categories>
-      <tags>
+          <tag> 学习 </tag>
         
       </tags>
       <tags></tags>

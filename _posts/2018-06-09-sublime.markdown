@@ -1,0 +1,94 @@
+---
+title:      "sublime text 3安装"
+date:       2018-06-09 12:00:00
+categories:
+- 工具
+tags:
+    - 工具
+---
+
+
+> "sublime text 3安装“
+
+## 问题
+
+sublime text 3 mac下的安装，
+
+## 软件下载
+
+去百度云或者官网
+
+## 修改host文件
+
+```
+vim /etc/hosts
+//加入下面的类容
+127.0.0.1       www.sublimetext.com
+127.0.0.1       license.sublimehq.com
+```
+## 输入key
+
+```
+----- BEGIN LICENSE -----
+sgbteam
+Single User License
+EA7E-1153259
+8891CBB9 F1513E4F 1A3405C1 A865D53F
+115F202E 7B91AB2D 0D2A40ED 352B269B
+76E84F0B CD69BFC7 59F2DFEF E267328F
+215652A3 E88F9D8F 4C38E3BA 5B2DAAE4
+969624E7 DC9CD4D5 717FB40C 1B9738CF
+20B3C4F1 E917B5B3 87C38D9C ACCE7DD8
+5F7EF854 86B9743C FADC04AA FB0DA5C0
+F913BE58 42FEA319 F954EFDD AE881E0B
+------ END LICENSE ------
+```
+
+## 安装package control
+
+***ctrl+\`*** 后输入
+```
+import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
+```
+
+## 安装插件
+
+### markdown插件
+MarkdownEditing: 修改用户设置(GFM)，修改为下列配置文件（先把default复制到user）
+```
+// Layout
+"draw_centered": true,
+"word_wrap": true,
+"wrap_width": 120,
+"rulers": [],
+```
+
+MarkdownPreview: 配合上一个插件用
+
+### 格式化代码相关
+CodeFormatter: 格式化代码，有几种语言不支持
+CoolFormat: 格式化代码
+Alignment：自动对齐插件
+
+### 注释相关 
+DocBlockr：可以快速注释
+
+### 补全相关
+All Autocomplete: 这个插件扩展了其自动完成的单词列表到所有打开的文件
+
+### 辅助阅读
+BracketHighlighter: 类似于代码匹配，可以匹配括号，引号等符号内的范围。对代码阅读很有帮助。
+
+### 文件比对
+
+### git相关
+Git:  这个插件会将Git整合进你的SublimeText，使的你可以在SublimeText中运行Git命令，包括添加，提交文件，查看日志，文件注解以及其它Git功能。
+GitGutter: 这是个十分有用的插件，它会在你最后一次提交Git后显示出有哪些行是被改动过的。
+
+### go相关
+gosublime: go语言格式化等
+
+### 目录树相关
+SideBarEnhancements：可以大大加强在侧栏目录树中右键的选项
+
+—— cesign 后记于 2018.06

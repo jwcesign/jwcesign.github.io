@@ -83,7 +83,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Jekyll, NexT" />
+  <meta name="keywords" content="学习," />
 
 
 
@@ -111,17 +111,19 @@
 
 
 
-<meta name="description" content="Keep going, keep leaning.">
-<meta name="keywords" content="Jekyll, NexT">
-<meta property="og:type" content="website">
-<meta property="og:title" content="NexT">
-<meta property="og:url" content="http://localhost:4000/tag/">
+<meta name="description" content="“k8s架构相关“">
+<meta name="keywords" content="学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="k8s架构">
+<meta property="og:url" content="http://localhost:4000/k8s/2018/06/06/k8s/">
 <meta property="og:site_name" content="NexT">
-<meta property="og:description" content="Keep going, keep leaning.">
+<meta property="og:description" content="“k8s架构相关“">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://jimmysong.io/kubernetes-handbook/images/architecture.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NexT">
-<meta name="twitter:description" content="Keep going, keep leaning.">
+<meta name="twitter:title" content="k8s架构">
+<meta name="twitter:description" content="“k8s架构相关“">
+<meta name="twitter:image" content="https://jimmysong.io/kubernetes-handbook/images/architecture.png">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -154,7 +156,7 @@
 
 
 
-  <title>Tag | NexT</title>
+  <title>k8s架构 | NexT</title>
   
 
 
@@ -179,7 +181,7 @@
   
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -268,181 +270,220 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-<div id="posts" class="posts-collapse" hidden>
-  <div class="collection-title">
-    <h1>
+
+<div id="posts" class="posts-expand">
+  
+  
+
+  
+
+  
+  
+  
+
+  <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/k8s/2018/06/06/k8s/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="assets/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NexT">
+    </span>
+
     
-    <small>Tag</small>
-    </h1>
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+          
+          
+            k8s架构
+          
+        </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-06T20:00:00+08:00">
+                2018-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/#/k8s" itemprop="url" rel="index">
+                    <span itemprop="name">k8s</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+            
+                <div class="post-description">
+                    
+                </div>
+            
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <blockquote>
+  <p>“k8s架构相关“</p>
+</blockquote>
+
+<h2 id="问题">问题</h2>
+
+<p>最近在学习k8s，感觉学得很迷，打算弄清楚k8s的系统架构</p>
+
+<h2 id="组件主要从master与node来说">组件(主要从master与node来说)</h2>
+<p>先来一张图解
+<img src="https://jimmysong.io/kubernetes-handbook/images/architecture.png" alt="img" />
+从图中可以发现Master节点主要有etcd,kube-controller,kube-apiserver,kube-scheduler; Node包括kubelet和kube-proxy</p>
+
+<p><a href="https://jimmysong.io/kubernetes-handbook/concepts/">详情请点击</a></p>
+
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            
+            <a href="/tag/#/%E5%AD%A6%E4%B9%A0" rel="tag"># 学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+        <div class="post-nav" id="post-nav-id">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/%E5%B7%A5%E5%85%B7/2018/06/09/sublime/" rel="next" title="sublime text 3安装">
+                <i class="fa fa-chevron-left"></i> sublime text 3安装
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/30/docker_learn/" rel="prev" title="Docker入门">
+                Docker入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+      
+
+      
+    </footer>
+  </article>
+
+  <div class="post-spread">
+    
   </div>
-
-  
-  
-
-  
-    
-    
-
-    
-      
-
-      
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article" route="/%E5%AD%A6%E4%B9%A0">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/k8s/2018/06/06/k8s/" itemprop="url">
-              
-                <span itemprop="name">k8s架构</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-06T20:00:00+08:00"
-              content="2018-06-06" >
-          06-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-    
-      
-
-      
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article" route="/%E5%AD%A6%E4%B9%A0">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/%E5%B7%A5%E5%85%B7/2018/03/05/python2-3-install-together/" itemprop="url">
-              
-                <span itemprop="name">Python2与python3兼容于pip同时兼容</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-05T20:00:00+08:00"
-              content="2018-03-05" >
-          03-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-    
-  
-    
-    
-
-    
-      
-
-      
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article" route="/%E6%9D%82">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/lan/2018/03/05/ssh%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" itemprop="url">
-              
-                <span itemprop="name">ssh实现内网穿透</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-05T20:00:00+08:00"
-              content="2018-03-05" >
-          03-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-    
-  
-    
-    
-
-    
-      
-
-      
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article" route="/Docker">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/30/docker_learn/" itemprop="url">
-              
-                <span itemprop="name">Docker入门</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-30T20:00:00+08:00"
-              content="2018-03-30" >
-          03-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-    
-  
-    
-    
-
-    
-      
-
-      
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article" route="/%E5%B7%A5%E5%85%B7">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/%E5%B7%A5%E5%85%B7/2018/06/09/sublime/" itemprop="url">
-              
-                <span itemprop="name">sublime text 3安装</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-06-09T20:00:00+08:00"
-              content="2018-06-09" >
-          06-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-    
-  
 </div>
-
-<nav class="pagination"></nav>
 
 
           </div>
@@ -450,6 +491,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -467,10 +512,30 @@
     <div class="sidebar-inner">
 
       
+        
+        
+        
+
+
+
+
+
+
 
       
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/assets/images/avatar.gif"
@@ -541,6 +606,34 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+
+
+
+
+
+
+
+            
+              <div class="post-toc-content">
+    <ol class=nav>
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#问题"> <span class="nav-number">1</span> <span class="nav-text">问题</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#组件主要从master与node来说"> <span class="nav-number">2</span> <span class="nav-text">组件(主要从master与node来说)</span> </a> </li>
+    </ol>
+  </div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -678,99 +771,9 @@
   
   
 
-  
-    
+  <script type="text/javascript" src="/assets/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/assets/js/src/post-details.js?v=5.1.1"></script>
 
-
-
-  <script type="text/javascript" src="/assets/js/src/paginator.js"></script>
-  <script>
-    (function() {
-      // Url route
-      var hash = window.location.hash.substring(1);
-      $(window).on('hashchange', function() {
-        location.reload();
-        $(this).scrollTop(0);
-      });
-
-      if (!hash)
-        hash = "/";
-      $('[route][route!="' + hash + '"]').remove();
-      $('#posts').show();
-
-      // Pagination
-      
-
-      
-
-      
-        if (hash == "/")  {
-          window.location = "/tags/";
-          return;
-        }
-
-        
-        
-
-        var maps = { '%E5%AD%A6%E4%B9%A0': 2, '%E6%9D%82': 1, 'Docker': 1, '%E5%B7%A5%E5%85%B7': 1, };
-        var dirs = hash.split("/");
-        var collection = decodeURIComponent(dirs[1]);
-        dirs.splice(0, 2);
-        hash = "/" + dirs.join("/");
-
-        if (!collection) {
-          window.location = "/tags/";
-          return;
-        }
-
-        $('.collection-title')[0].childNodes[1].childNodes[0].nodeValue = collection;
-        document.title = "Tag: " + collection + " | NexT";
-
-        var sizes = maps[encodeURIComponent(collection)];
-        var base = "#" + "/" + collection;
-      
-
-      var current = 0;
-
-      if (hash != '/') {
-        
-
-        var reg = /(?:\/page(\d+))/;
-        var res = reg.exec(hash);
-
-        if (res && res[1])
-          current = parseInt(res[1]);
-      }
-      else {
-        current = 1;
-      }
-
-      var total = Math.floor(sizes / 10);
-      if (sizes % 10 > 0) {
-        total = total + 1;
-      }
-
-      if (total <= 1) {
-        $('nav.pagination').remove();
-      }
-      else {
-        var content = paginator({
-                          prev_text: '<i class="fa fa-angle-left"></i>',
-                          next_text: '<i class="fa fa-angle-right"></i>',
-                          current: current,
-                          total: total,
-                          base: base,
-                          format: "/page%d",
-                          mid_size: 1,
-                          end_size: 1
-                        });
-          $('nav.pagination').html(content);
-      }
-    })();
-  </script>
-
-
-  
 
   
 

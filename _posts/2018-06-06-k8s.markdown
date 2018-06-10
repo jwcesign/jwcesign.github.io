@@ -1,0 +1,24 @@
+---
+title:      "k8s架构"
+date:       2018-06-06 12:00:00
+categories:
+- k8s
+tags:
+    - 学习
+---
+
+
+> "k8s架构相关“
+
+## 问题
+
+最近在学习k8s，感觉学得很迷，打算弄清楚k8s的系统架构
+
+## 组件(主要从master与node来说)
+先来一张图解
+![img](https://jimmysong.io/kubernetes-handbook/images/architecture.png)
+从图中可以发现Master节点主要有etcd,kube-controller,kube-apiserver,kube-scheduler; Node包括kubelet和kube-proxy
+
+[详情请点击](https://jimmysong.io/kubernetes-handbook/concepts/)
+
+
