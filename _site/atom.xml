@@ -1,4 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-06-11T00:35:04+08:00</updated><id>http://localhost:4000/</id><title type="html">NexT</title><subtitle>Keep going, keep leaning.</subtitle><author><name>John Doe</name></author><entry><title type="html">sublime text 3安装</title><link href="http://localhost:4000/%E5%B7%A5%E5%85%B7/2018/06/09/sublime/" rel="alternate" type="text/html" title="sublime text 3安装" /><published>2018-06-09T20:00:00+08:00</published><updated>2018-06-09T20:00:00+08:00</updated><id>http://localhost:4000/%E5%B7%A5%E5%85%B7/2018/06/09/sublime</id><content type="html" xml:base="http://localhost:4000/%E5%B7%A5%E5%85%B7/2018/06/09/sublime/">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-06-12T00:19:12+08:00</updated><id>http://localhost:4000/</id><title type="html">NexT</title><subtitle>Keep going, keep leaning.</subtitle><author><name>CESIGN</name></author><entry><title type="html">k8s 1.10集群deploy</title><link href="http://localhost:4000/k8s/2018/06/11/k8s1.10/" rel="alternate" type="text/html" title="k8s 1.10集群deploy" /><published>2018-06-11T20:00:00+08:00</published><updated>2018-06-11T20:00:00+08:00</updated><id>http://localhost:4000/k8s/2018/06/11/k8s1.10</id><content type="html" xml:base="http://localhost:4000/k8s/2018/06/11/k8s1.10/">&lt;h2 id=&quot;k8s-110搭建问题&quot;&gt;k8s 1.10搭建问题&lt;/h2&gt;
+
+&lt;h3 id=&quot;master节点&quot;&gt;master节点&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;将etcd  etcdctl  kube-apiserver  kube-controller-manager  kubectl  kube-scheduler二进制文件复制到master节点&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;详细请点击&quot;&gt;详细请点击&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/jwcesign/k8s_deploy&quot;&gt;k8s 1.10 安装&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;k8s-110-容器化组件&quot;&gt;k8s 1.10 容器化组件&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;等待&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>CESIGN</name></author><category term="k8s" /><summary type="html">k8s 1.10搭建问题</summary></entry><entry><title type="html">sublime text 3安装</title><link href="http://localhost:4000/%E5%B7%A5%E5%85%B7/2018/06/09/sublime/" rel="alternate" type="text/html" title="sublime text 3安装" /><published>2018-06-09T20:00:00+08:00</published><updated>2018-06-09T20:00:00+08:00</updated><id>http://localhost:4000/%E5%B7%A5%E5%85%B7/2018/06/09/sublime</id><content type="html" xml:base="http://localhost:4000/%E5%B7%A5%E5%85%B7/2018/06/09/sublime/">&lt;blockquote&gt;
   &lt;p&gt;“sublime text 3安装“&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -83,7 +100,13 @@ GitGutter: 这是个十分有用的插件，它会在你最后一次提交Git后
 &lt;h3 id=&quot;目录树相关&quot;&gt;目录树相关&lt;/h3&gt;
 &lt;p&gt;SideBarEnhancements：可以大大加强在侧栏目录树中右键的选项&lt;/p&gt;
 
-&lt;p&gt;—— cesign 后记于 2018.06&lt;/p&gt;</content><author><name>John Doe</name></author><category term="工具" /><summary type="html">“sublime text 3安装“</summary></entry><entry><title type="html">k8s架构</title><link href="http://localhost:4000/k8s/2018/06/06/k8s/" rel="alternate" type="text/html" title="k8s架构" /><published>2018-06-06T20:00:00+08:00</published><updated>2018-06-06T20:00:00+08:00</updated><id>http://localhost:4000/k8s/2018/06/06/k8s</id><content type="html" xml:base="http://localhost:4000/k8s/2018/06/06/k8s/">&lt;blockquote&gt;
+&lt;h2 id=&quot;设置终端快捷键&quot;&gt;设置终端快捷键&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/sublime
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;—— cesign 后记于 2018.06&lt;/p&gt;</content><author><name>CESIGN</name></author><category term="工具" /><summary type="html">“sublime text 3安装“</summary></entry><entry><title type="html">k8s架构</title><link href="http://localhost:4000/k8s/2018/06/06/k8s/" rel="alternate" type="text/html" title="k8s架构" /><published>2018-06-06T20:00:00+08:00</published><updated>2018-06-06T20:00:00+08:00</updated><id>http://localhost:4000/k8s/2018/06/06/k8s</id><content type="html" xml:base="http://localhost:4000/k8s/2018/06/06/k8s/">&lt;blockquote&gt;
   &lt;p&gt;“k8s架构相关“&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -96,7 +119,7 @@ GitGutter: 这是个十分有用的插件，它会在你最后一次提交Git后
 &lt;img src=&quot;https://jimmysong.io/kubernetes-handbook/images/architecture.png&quot; alt=&quot;img&quot; /&gt;
 从图中可以发现Master节点主要有etcd,kube-controller,kube-apiserver,kube-scheduler; Node包括kubelet和kube-proxy&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://jimmysong.io/kubernetes-handbook/concepts/&quot;&gt;详情请点击&lt;/a&gt;&lt;/p&gt;</content><author><name>John Doe</name></author><category term="学习" /><summary type="html">“k8s架构相关“</summary></entry><entry><title type="html">Docker入门</title><link href="http://localhost:4000/2018/03/30/docker_learn/" rel="alternate" type="text/html" title="Docker入门" /><published>2018-03-30T20:00:00+08:00</published><updated>2018-03-30T20:00:00+08:00</updated><id>http://localhost:4000/2018/03/30/docker_learn</id><content type="html" xml:base="http://localhost:4000/2018/03/30/docker_learn/">&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://jimmysong.io/kubernetes-handbook/concepts/&quot;&gt;详情请点击&lt;/a&gt;&lt;/p&gt;</content><author><name>CESIGN</name></author><category term="学习" /><summary type="html">“k8s架构相关“</summary></entry><entry><title type="html">Docker入门</title><link href="http://localhost:4000/2018/03/30/docker_learn/" rel="alternate" type="text/html" title="Docker入门" /><published>2018-03-30T20:00:00+08:00</published><updated>2018-03-30T20:00:00+08:00</updated><id>http://localhost:4000/2018/03/30/docker_learn</id><content type="html" xml:base="http://localhost:4000/2018/03/30/docker_learn/">&lt;blockquote&gt;
   &lt;p&gt;“Docker学习”&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -232,4 +255,4 @@ docker inspect con_id
 &lt;/div&gt;
 
 &lt;h2 id=&quot;后记&quot;&gt;后记&lt;/h2&gt;
-&lt;p&gt;快速积累&lt;/p&gt;</content><author><name>John Doe</name></author><category term="学习" /><summary type="html">“python安装问题”</summary></entry></feed>
+&lt;p&gt;快速积累&lt;/p&gt;</content><author><name>CESIGN</name></author><category term="学习" /><summary type="html">“python安装问题”</summary></entry></feed>
