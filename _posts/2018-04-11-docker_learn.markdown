@@ -1,9 +1,6 @@
 ---
-layout:     post
 title:      "Docker入门"
-subtitle:   " \"Docker\""
 date:       2018-03-30 12:00:00
-author:     "CESIGN"
 header-img: "img/post-bg-2015.jpg"
 catalog: true
 tags:
