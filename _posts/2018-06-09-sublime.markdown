@@ -91,4 +91,10 @@ gosublime: go语言格式化等
 ### 目录树相关
 SideBarEnhancements：可以大大加强在侧栏目录树中右键的选项
 
+## 设置终端快捷键
+
+~~~
+ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/sublime
+~~~
+
 —— cesign 后记于 2018.06
