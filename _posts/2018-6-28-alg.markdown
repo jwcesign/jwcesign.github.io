@@ -1,0 +1,83 @@
+---
+title:      "查找算法"
+date:       2018-06-28 12:00:00
+categories:
+- 算法
+tags:
+    - 算法
+---
+
+# 查找算法
+
+## 顺序查找
+
+* 说明：顺序查找适合于存储结构为顺序存储或链接存储的线性表。
+* 基本思想：顺序查找也称为线形查找，属于无序查找算法。从数据结构线形表的一端开始，顺序扫描，依次将扫描到的结点关键字与给定值k相比较，若相等则表示查找成功；若扫描结束仍没有找到关键字等于k的结点，表示查找失败。
+* 算法复杂度：查找成功时的平均查找长度为：（假设每个数据元素的概率相等） ASL = 1/n(1+2+3+…+n) = (n+1)/2 ；当查找不成功时，需要n+1次比较，时间复杂度为O(n);所以，顺序查找的时间复杂度为O(n)。
+* 实现代码
+~~~c
+#include <stdio.h>
+
+
+int find_intvalue(int array[], int value, int n)
+{
+  int i;
+  for (i = 0; i < n; i++) {
+    if (array[i] == value) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+
+int main()
+{
+  int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  int value = 4;
+  int ind;
+  ind = find_intvalue(a, value, 10);
+  printf("%d", ind);
+  return 0;
+}
+
+~~~
+
+## 二分查找
+* 说明：元素必须是有序的，如果是无序的则要先进行排序操作。
+* 基本思想：也称为是折半查找，属于有序查找算法。
+* 复杂度分析：最坏情况下，关键词比较次数为log2(n+1)，且期望时间复杂度为O(log2n)；
+* 实现代码
+~~~c
+#include <stdio.h>
+
+int binary_find(int array[], int va, int len)
+{
+  int low, high, middle;
+  low = 0;
+  high = len - 1;
+  while (low <= high) {
+    middle = (low + high) / 2;
+    if (array[middle] > va) {
+      high = middle;
+    } else if (array[middle] == va)
+    {
+      return middle;
+    } else {
+      low = middle;
+    }
+  }
+  return -1;
+}
+
+int main()
+{
+  int array[6] = {1, 2, 3, 4, 5, 6};
+  int va = 5;
+  int ind;
+  ind = binary_find(array,va,6);
+  printf("%d",ind);
+  return -1;
+}
+~~~
+
