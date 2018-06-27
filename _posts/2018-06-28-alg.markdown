@@ -1,0 +1,197 @@
+---
+title:      "查找算法"
+date:       2018-06-28 12:00:00
+categories:
+- 算法
+tags:
+    - 算法
+---
+
+# 查找算法
+
+## 顺序查找
+
+* 说明：顺序查找适合于存储结构为顺序存储或链接存储的线性表。
+* 基本思想：顺序查找也称为线形查找，属于无序查找算法。从数据结构线形表的一端开始，顺序扫描，依次将扫描到的结点关键字与给定值k相比较，若相等则表示查找成功；若扫描结束仍没有找到关键字等于k的结点，表示查找失败。
+* 算法复杂度：查找成功时的平均查找长度为：（假设每个数据元素的概率相等） ASL = 1/n(1+2+3+…+n) = (n+1)/2 ；当查找不成功时，需要n+1次比较，时间复杂度为O(n);所以，顺序查找的时间复杂度为O(n)。
+* 实现代码
+
+~~~c
+#include <stdio.h>
+
+
+int find_intvalue(int array[], int value, int n)
+{
+  int i;
+  for (i = 0; i < n; i++) {
+    if (array[i] == value) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+
+int main()
+{
+  int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  int value = 4;
+  int ind;
+  ind = find_intvalue(a, value, 10);
+  printf("%d", ind);
+  return 0;
+}
+
+~~~
+
+## 二分查找
+* 说明：元素必须是有序的，如果是无序的则要先进行排序操作。
+* 基本思想：也称为是折半查找，属于有序查找算法。
+* 复杂度分析：最坏情况下，关键词比较次数为log2(n+1)，且期望时间复杂度为O(log2n)；
+* 实现代码
+
+~~~c
+#include <stdio.h>
+
+int binary_find(int array[], int va, int len)
+{
+  int low, high, middle;
+  low = 0;
+  high = len - 1;
+  while (low <= high) {
+    middle = (low + high) / 2;
+    if (array[middle] > va) {
+      high = middle+1;
+    } else if (array[middle] == va)
+    {
+      return middle;
+    } else {
+      low = middle-1;
+    }
+  }
+  return -1;
+}
+
+int main()
+{
+  int array[6] = {1, 2, 3, 4, 5, 6};
+  int va = 5;
+  int ind;
+  ind = binary_find(array,va,6);
+  printf("%d",ind);
+  return -1;
+}
+~~~
+
+## 插值查找
+* 基本思想：基于二分查找算法，将查找点的选择改进为自适应选择，可以提高查找效率。当然，差值查找也属于有序查找。
+* 复杂度分析：查找成功或者失败的时间复杂度均为O(log2(log2n))。
+* 实现代码
+
+~~~c
+#include <stdio.h>
+
+int binary_find(int array[], int va, int len)
+{
+  int low, high, middle;
+  low = 0;
+  high = len - 1;
+  float tmp;
+  while (low <= high) {
+    tmp = ((va - array[low])*1.0 / (array[high] - array[low])) * (high - low);
+    middle = low + (int)tmp;
+    if (array[middle] == va)
+      return middle;
+    if (array[middle] < va)
+      low = middle-1;
+    if (array[middle] > va)
+      high = middle+1;
+  }
+  return -1;
+}
+
+int main()
+{
+  int array[6] = {1, 2, 3, 4, 5, 6};
+  int va = 5;
+  int ind;
+  ind = binary_find(array, va, 6);
+  printf("%d", ind);
+  return 0;
+}
+~~~
+
+## 斐波那契查找
+* 复杂度分析：最坏情况下，时间复杂度为O(log2n)，且其期望复杂度也为O(log2n)。
+* 斐波那契查找的优点是它只涉及加法和减法运算，而不用除法，而除法比加减法要占用更多的时间，因此，斐波那契查找的运行时间理论上比折半查找小，但是还是得视具体情况而定。
+* 实现代码
+
+~~~c
+#include <stdio.h>
+
+int MAX_SIZE = 50;
+
+void init_fibonacci(int f[])
+{
+  int i;
+  f[0] = 1;
+  f[1] = 1;
+  for (i = 2; i < MAX_SIZE; i++)
+    f[i] = f[i - 1] + f[i - 2];
+}
+
+int fibonacci_search(int array[], int va, int len)
+{
+  int low, high, middle;
+  int k, i;
+  int tmp[MAX_SIZE];
+
+  high = len - 1;
+  k = 0;
+  low = 0;
+
+  int F[MAX_SIZE];
+  init_fibonacci(F);
+  while (len > (F[k] - 1))
+    k++;
+
+  for (i = 0; i < len; i++)
+    tmp[i] = array[i];
+
+  for (i = len; i < (F[k] - 1); i++)
+    tmp[i] = array[high];
+
+  while (low <= high)
+  {
+    middle = low + F[k - 1] - 1;
+    if (tmp[middle] == va)
+      if (middle < len)
+        return middle;
+      else
+        return len - 1;
+    if (tmp[middle] < va)
+    { 
+      low = middle + 1; 
+      k -= 2;
+    }
+    if (tmp[middle] > va)
+    { 
+      high = middle - 1; 
+      k -= 1;
+    }
+  }
+
+  return -1;
+}
+
+int main()
+{
+  int array[6] = {1, 2, 3, 4, 5, 6};
+  int va = 5;
+  int ind;
+  ind = fibonacci_search(array, va, 6);
+  printf("%d\n", ind);
+  return 0;
+}
+~~~
+
