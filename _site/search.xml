@@ -2,6 +2,444 @@
 <search>
   
     <entry>
+      <title>DDS学习</title>
+      <url>/ros/2018/07/14/dds/</url>
+      <content type="text">DDS学习
+
+概念
+DDS以数据为中心的发布一订阅模型为所有分布式节点之间建立了一个虚拟共享的“全局数据空间(Global Data Space, GDS)。在该模型下分布式节点在网络上以发布或订阅的方式传输数据，节点可以是发布者或订阅者，或者既是发布者又是订阅者。网络中的数据对象用主题((Topic)做标识，分布式节点在全局数据空间中发布或订阅感兴趣的主题信息。各个节点在逻辑上无主从关系，点与点之间都是对等关系.通信方式可以是点对点、点对多、多对多等，在QoS的控制下建立连接，自动发现和配置网络参数,如下图
+
+
+DDS架构
+
+DDS规范有两层，分别是数据本地重构层DLRL（Data Local Reconstruction Layer)和以数据为中心的发布一订阅层DCPS（Data-Centric Publish-Subscribe）。DCPS层是DDS的核心和基础，提供了通信的基本服务；DLRL层将DCPS层提供的服务进行了抽象，在DLRL层建立了与底层服务的映射关系。
+
+DDS域（Domain）和域参与者（Domain Participant）
+
+
+DDS组成模型
+DDS内所有的成员都是Entity，DDS中的任两个Entity（实体角色）通信都必须在同一个Domain内进行交互，即他们初始化时DomainID是同一个，并且不同Domain的DomainID必须唯一。Domain内的DomainParticipant是服务的入口点，任何DDS应用都需首先获取DomainParticipant，然后通过Domain Participant获取其他服务，如Publisher、Subscriber、Topic等。
+
+
+几个重要概念
+
+  服务质量策略(QoS)。DDS规范定义了丰富的服务质量策略(Quality of Services Policies)，QoS是一种网络传输策略，应用程序指定所需要的网络传输质量行为，QoS服务实现这种行为要求，尽可能地满足客户对通信质量的需求，DDS定义QoS策略使其对复杂网络环境的适应性和鲁棒性大大增强，优化网络传输质量。QoS可以理解为数据提供者和接收者之间的合约。
+
+  Domain是一个范围概念，由域号(DomainID ) 唯一标示，只有在同一个域内的通信实体才能通信，不同域内的实体间无任何逻辑关系。
+  Domain Participant作为数据分发服务的入口点，包含若干发布者、订阅者和注册主题，负责创建、删除和管理这些实体。
+  Publisher作为发布者角色，至少包含一个DataWriter，并负责创建、删除和管理DataWriter。同样，Subscribe作为订阅角色，至少与一个DataReader关联，并负责创建、删除和管理DataReader。
+  DataWriter具体负责发布数据，数据发布者通过调用DataWriter的write函数发布数据，但数据不会立刻被送出，实际的消息产生是通过Puhlisher和QoS综合控制的。
+  DataReader负责订阅数据，订阅方式可采用异步方式(Listener)、同步方式(WaitSet)和非阻塞三种。
+  Topic是DataWriter和DataReader相互通信时约定的主题，每个DataWriter/DataReader必须与一个主题绑定，相互通信的DataWriter与DataReader之间的主题数据类型必须相同、QoS必须匹配。另外，Topic必须有确定的数据类型。
+
+</content>
+      <categories>
+        
+          <category> ros </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> ros </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title>查找算法</title>
+      <url>/%E7%AE%97%E6%B3%95/2018/06/28/alg/</url>
+      <content type="text">查找算法
+
+顺序查找
+
+
+  说明：顺序查找适合于存储结构为顺序存储或链接存储的线性表。
+  基本思想：顺序查找也称为线形查找，属于无序查找算法。从数据结构线形表的一端开始，顺序扫描，依次将扫描到的结点关键字与给定值k相比较，若相等则表示查找成功；若扫描结束仍没有找到关键字等于k的结点，表示查找失败。
+  算法复杂度：查找成功时的平均查找长度为：（假设每个数据元素的概率相等） ASL = 1/n(1+2+3+…+n) = (n+1)/2 ；当查找不成功时，需要n+1次比较，时间复杂度为O(n);所以，顺序查找的时间复杂度为O(n)。
+  实现代码
+
+
+#include &amp;lt;stdio.h&amp;gt;
+
+
+int find_intvalue(int array[], int value, int n)
+{
+  int i;
+  for (i = 0; i &amp;lt; n; i++) {
+    if (array[i] == value) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+
+int main()
+{
+  int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  int value = 4;
+  int ind;
+  ind = find_intvalue(a, value, 10);
+  printf(&quot;%d&quot;, ind);
+  return 0;
+}
+
+
+
+
+二分查找
+
+  说明：元素必须是有序的，如果是无序的则要先进行排序操作。
+  基本思想：也称为是折半查找，属于有序查找算法。
+  复杂度分析：最坏情况下，关键词比较次数为log2(n+1)，且期望时间复杂度为O(log2n)；
+  实现代码
+
+
+#include &amp;lt;stdio.h&amp;gt;
+
+int binary_find(int array[], int va, int len)
+{
+  int low, high, middle;
+  low = 0;
+  high = len - 1;
+  while (low &amp;lt;= high) {
+    middle = (low + high) / 2;
+    if (array[middle] &amp;gt; va) {
+      high = middle+1;
+    } else if (array[middle] == va)
+    {
+      return middle;
+    } else {
+      low = middle-1;
+    }
+  }
+  return -1;
+}
+
+int main()
+{
+  int array[6] = {1, 2, 3, 4, 5, 6};
+  int va = 5;
+  int ind;
+  ind = binary_find(array,va,6);
+  printf(&quot;%d&quot;,ind);
+  return -1;
+}
+
+
+
+插值查找
+
+  基本思想：基于二分查找算法，将查找点的选择改进为自适应选择，可以提高查找效率。当然，差值查找也属于有序查找。
+  复杂度分析：查找成功或者失败的时间复杂度均为O(log2(log2n))。
+  实现代码
+
+
+#include &amp;lt;stdio.h&amp;gt;
+
+int binary_find(int array[], int va, int len)
+{
+  int low, high, middle;
+  low = 0;
+  high = len - 1;
+  float tmp;
+  while (low &amp;lt;= high) {
+    tmp = ((va - array[low])*1.0 / (array[high] - array[low])) * (high - low);
+    middle = low + (int)tmp;
+    if (array[middle] == va)
+      return middle;
+    if (array[middle] &amp;lt; va)
+      low = middle-1;
+    if (array[middle] &amp;gt; va)
+      high = middle+1;
+  }
+  return -1;
+}
+
+int main()
+{
+  int array[6] = {1, 2, 3, 4, 5, 6};
+  int va = 5;
+  int ind;
+  ind = binary_find(array, va, 6);
+  printf(&quot;%d&quot;, ind);
+  return 0;
+}
+
+
+
+斐波那契查找
+
+  复杂度分析：最坏情况下，时间复杂度为O(log2n)，且其期望复杂度也为O(log2n)。
+  斐波那契查找的优点是它只涉及加法和减法运算，而不用除法，而除法比加减法要占用更多的时间，因此，斐波那契查找的运行时间理论上比折半查找小，但是还是得视具体情况而定。
+  实现代码
+
+
+#include &amp;lt;stdio.h&amp;gt;
+
+int MAX_SIZE = 50;
+
+void init_fibonacci(int f[])
+{
+  int i;
+  f[0] = 1;
+  f[1] = 1;
+  for (i = 2; i &amp;lt; MAX_SIZE; i++)
+    f[i] = f[i - 1] + f[i - 2];
+}
+
+int fibonacci_search(int array[], int va, int len)
+{
+  int low, high, middle;
+  int k, i;
+  int tmp[MAX_SIZE];
+
+  high = len - 1;
+  k = 0;
+  low = 0;
+
+  int F[MAX_SIZE];
+  init_fibonacci(F);
+  while (len &amp;gt; (F[k] - 1))
+    k++;
+
+  for (i = 0; i &amp;lt; len; i++)
+    tmp[i] = array[i];
+
+  for (i = len; i &amp;lt; (F[k] - 1); i++)
+    tmp[i] = array[high];
+
+  while (low &amp;lt;= high)
+  {
+    middle = low + F[k - 1] - 1;
+    if (tmp[middle] == va)
+      if (middle &amp;lt; len)
+        return middle;
+      else
+        return len - 1;
+    if (tmp[middle] &amp;lt; va)
+    { 
+      low = middle + 1; 
+      k -= 2;
+    }
+    if (tmp[middle] &amp;gt; va)
+    { 
+      high = middle - 1; 
+      k -= 1;
+    }
+  }
+
+  return -1;
+}
+
+int main()
+{
+  int array[6] = {1, 2, 3, 4, 5, 6};
+  int va = 5;
+  int ind;
+  ind = fibonacci_search(array, va, 6);
+  printf(&quot;%d\n&quot;, ind);
+  return 0;
+}
+
+
+
+二叉树查找
+
+  它和二分查找一样，插入和查找的时间复杂度均为O(logn)，但是在最坏的情况下仍然会有O(n)的时间复杂度。原因在于插入和删除元素的时候，树没有保持平衡（比如，我们查找上图（b）中的“93”，我们需要进行n次查找操作）。
+  基本思想：二叉查找树是先对待查找的数据进行生成树，确保树的左分支的值小于右分支的值，然后在就行和每个节点的父节点比较大小，查找最适合的范围。 这个算法的查找效率很高，但是如果使用这种查找方法要首先创建树。
+  代码实现：
+
+
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+
+#define SIZE 10
+
+typedef struct binary_node{
+  int value;
+  struct binary_node* left;
+  struct binary_node* right;
+}bin_node;
+
+
+void insert_node(bin_node* root,bin_node* child)
+{
+  if (child-&amp;gt;value &amp;gt;= root-&amp;gt;value &amp;amp;&amp;amp; root-&amp;gt;right != NULL)
+  {
+    insert_node(root-&amp;gt;right,child);
+  }
+  if (child-&amp;gt;value &amp;lt; root-&amp;gt;value &amp;amp;&amp;amp; root-&amp;gt;left != NULL)
+  {
+    insert_node(root-&amp;gt;left,child);
+  }
+  if (child-&amp;gt;value &amp;gt;= root-&amp;gt;value &amp;amp;&amp;amp; root-&amp;gt;right == NULL)
+  {
+    root-&amp;gt;right = child;
+  }
+  if (child-&amp;gt;value &amp;lt; root-&amp;gt;value &amp;amp;&amp;amp; root-&amp;gt;left == NULL)
+  {
+    root-&amp;gt;left = child;
+  }
+}
+
+void create_tree(bin_node** root, int array[], int size)
+{
+  int i;
+  *root = (bin_node*)malloc(sizeof(bin_node)); 
+  (*root)-&amp;gt;value = array[0];
+  (*root)-&amp;gt;left = NULL;
+  (*root)-&amp;gt;right = NULL;
+  for (i=1; i&amp;lt;size;i++)
+  {
+    bin_node* child = (bin_node*)malloc(sizeof(bin_node));
+    child-&amp;gt;value = array[i];
+    child-&amp;gt;left = NULL;
+    child-&amp;gt;right = NULL;
+    insert_node(*root,child);
+  }
+}
+
+void dis_node(bin_node* node)
+{
+  if (node == NULL)
+    return;
+  if (node-&amp;gt;left != NULL)
+  {
+    dis_node(node-&amp;gt;left);
+  }
+  printf(&quot;%d &quot;,node-&amp;gt;value);
+  if (node-&amp;gt;right != NULL)
+  {
+    dis_node(node-&amp;gt;right);
+  }
+}
+
+bin_node* search_node(bin_node* node, int value)
+{
+  if (node == NULL)
+  {
+    return NULL;
+  }
+  if (value == node-&amp;gt;value)
+  {
+    return node;
+  }
+  if (value &amp;gt; node-&amp;gt;value)
+  {
+    return search_node(node-&amp;gt;right,value);
+  }
+  if (value &amp;lt; node-&amp;gt;value)
+  {
+    return search_node(node-&amp;gt;left,value);
+  }
+  return NULL;
+}
+
+
+int main()
+{
+  int array[SIZE] = {4,1,45,78,345,23,12,3,6,21};
+  bin_node* root = NULL;
+  bin_node* search_result = NULL;
+  int search_value;
+  create_tree(&amp;amp;root,array,SIZE);
+  dis_node(root);
+  printf(&quot;\nPlease input value to search:&quot;);
+  scanf(&quot;%d&quot;,&amp;amp;search_value);
+  search_result = search_node(root,search_value);
+  if (search_result != NULL)
+  {
+    printf(&quot;Yes\n&quot;)&amp;amp;;
+  }
+  else
+  {
+    printf(&quot;No\n&quot;);
+  }
+  return 0;
+}
+
+
+
+2-3查找树
+
+  在最好的情况下，所有的节点都是3-node节点，查找效率为log3N约等于0.631lgN
+  在最坏的情况下，也就是所有的节点都是2-node节点，查找效率为lgN
+  代码就不用实现了，因为维护代价比较大，不适用
+  原理: link
+
+
+红黑查找树
+
+  是2-3树的一种实现。
+  原理：link
+  
+
+</content>
+      <categories>
+        
+          <category> 算法 </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> 算法 </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title>gdb调试</title>
+      <url>/%E5%B7%A5%E5%85%B7/2018/06/27/gdb/</url>
+      <content type="text">gdb调试
+
+gcc -g  main.c                      //在目标文件加入源代码的信息
+gdb a.out       
+
+(gdb) start                         //开始调试
+(gdb) n                             //一条一条执行
+(gdb) step/s                        //执行下一条，如果函数进入函数
+(gdb) backtrace/bt                  //查看函数调用栈帧
+(gdb) info/i locals                 //查看当前栈帧局部变量
+(gdb) frame/f                       //选择栈帧，再查看局部变量
+(gdb) print/p                       //打印变量的值
+(gdb) finish                        //运行到当前函数返回
+(gdb) set var sum=0                 //修改变量值
+(gdb) list/l 行号或函数名             //列出源码
+(gdb) display/undisplay sum         //每次停下显示变量的值/取消跟踪
+(gdb) break/b  行号或函数名           //设置断点
+(gdb) continue/c                    //连续运行
+(gdb) info/i breakpoints            //查看已经设置的断点
+(gdb) delete breakpoints 2          //删除某个断点
+(gdb) disable/enable breakpoints 3  //禁用/启用某个断点
+(gdb) break 9 if sum != 0           //满足条件才激活断点
+(gdb) run/r                         //重新从程序开头连续执行
+(gdb) watch input[4]                //设置观察点
+(gdb) info/i watchpoints            //查看设置的观察点
+(gdb) x/7b input                    //打印存储器内容，b--每个字节一组，7--7组
+(gdb) disassemble                   //反汇编当前函数或指定函数
+(gdb) si                            // 一条指令一条指令调试 而 s 是一行一行代码
+(gdb) info registers                // 显示所有寄存器的当前值
+(gdb) x/20 $esp                    //查看内存中开始的20个数
+
+
+</content>
+      <categories>
+        
+          <category> 工具 </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> 工具 </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
       <title>k8s 1.10集群deploy</title>
       <url>/k8s/2018/06/11/k8s1.10/</url>
       <content type="text">k8s 1.10搭建问题

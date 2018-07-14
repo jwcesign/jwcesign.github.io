@@ -195,3 +195,128 @@ int main()
 }
 ~~~
 
+## 二叉树查找
+* 它和二分查找一样，插入和查找的时间复杂度均为O(logn)，但是在最坏的情况下仍然会有O(n)的时间复杂度。原因在于插入和删除元素的时候，树没有保持平衡（比如，我们查找上图（b）中的“93”，我们需要进行n次查找操作）。
+* 基本思想：二叉查找树是先对待查找的数据进行生成树，确保树的左分支的值小于右分支的值，然后在就行和每个节点的父节点比较大小，查找最适合的范围。 这个算法的查找效率很高，但是如果使用这种查找方法要首先创建树。 
+* 代码实现：
+
+~~~c
+#include <stdio.h>
+#include <stdlib.h>
+
+#define SIZE 10
+
+typedef struct binary_node{
+  int value;
+  struct binary_node* left;
+  struct binary_node* right;
+}bin_node;
+
+
+void insert_node(bin_node* root,bin_node* child)
+{
+  if (child->value >= root->value && root->right != NULL)
+  {
+    insert_node(root->right,child);
+  }
+  if (child->value < root->value && root->left != NULL)
+  {
+    insert_node(root->left,child);
+  }
+  if (child->value >= root->value && root->right == NULL)
+  {
+    root->right = child;
+  }
+  if (child->value < root->value && root->left == NULL)
+  {
+    root->left = child;
+  }
+}
+
+void create_tree(bin_node** root, int array[], int size)
+{
+  int i;
+  *root = (bin_node*)malloc(sizeof(bin_node)); 
+  (*root)->value = array[0];
+  (*root)->left = NULL;
+  (*root)->right = NULL;
+  for (i=1; i<size;i++)
+  {
+    bin_node* child = (bin_node*)malloc(sizeof(bin_node));
+    child->value = array[i];
+    child->left = NULL;
+    child->right = NULL;
+    insert_node(*root,child);
+  }
+}
+
+void dis_node(bin_node* node)
+{
+  if (node == NULL)
+    return;
+  if (node->left != NULL)
+  {
+    dis_node(node->left);
+  }
+  printf("%d ",node->value);
+  if (node->right != NULL)
+  {
+    dis_node(node->right);
+  }
+}
+
+bin_node* search_node(bin_node* node, int value)
+{
+  if (node == NULL)
+  {
+    return NULL;
+  }
+  if (value == node->value)
+  {
+    return node;
+  }
+  if (value > node->value)
+  {
+    return search_node(node->right,value);
+  }
+  if (value < node->value)
+  {
+    return search_node(node->left,value);
+  }
+  return NULL;
+}
+
+
+int main()
+{
+  int array[SIZE] = {4,1,45,78,345,23,12,3,6,21};
+  bin_node* root = NULL;
+  bin_node* search_result = NULL;
+  int search_value;
+  create_tree(&root,array,SIZE);
+  dis_node(root);
+  printf("\nPlease input value to search:");
+  scanf("%d",&search_value);
+  search_result = search_node(root,search_value);
+  if (search_result != NULL)
+  {
+    printf("Yes\n")&;
+  }
+  else
+  {
+    printf("No\n");
+  }
+  return 0;
+}
+~~~
+
+## 2-3查找树
+* 在最好的情况下，所有的节点都是3-node节点，查找效率为log3N约等于0.631lgN
+* 在最坏的情况下，也就是所有的节点都是2-node节点，查找效率为lgN
+* 代码就不用实现了，因为维护代价比较大，不适用
+* 原理: [link](https://blog.csdn.net/u014688145/article/details/67636509)
+
+## 红黑查找树
+* 是2-3树的一种实现。
+* 原理：[link](https://blog.csdn.net/u014688145/article/details/68489582)
+* 

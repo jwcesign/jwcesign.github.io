@@ -83,7 +83,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Jekyll, NexT" />
+  <meta name="keywords" content="工具," />
 
 
 
@@ -111,17 +111,17 @@
 
 
 
-<meta name="description" content="Keep going, keep leaning.">
-<meta name="keywords" content="Jekyll, NexT">
-<meta property="og:type" content="website">
-<meta property="og:title" content="NexT">
-<meta property="og:url" content="http://localhost:4000/tags/">
+<meta name="description" content="gdb调试">
+<meta name="keywords" content="工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gdb调试">
+<meta property="og:url" content="http://localhost:4000/%E5%B7%A5%E5%85%B7/2018/06/27/gdb/">
 <meta property="og:site_name" content="NexT">
-<meta property="og:description" content="Keep going, keep leaning.">
+<meta property="og:description" content="gdb调试">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NexT">
-<meta name="twitter:description" content="Keep going, keep leaning.">
+<meta name="twitter:title" content="gdb调试">
+<meta name="twitter:description" content="gdb调试">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -154,7 +154,7 @@
 
 
 
-  <title>              Tags | NexT      </title>
+  <title>gdb调试 | NexT</title>
   
 
 
@@ -268,42 +268,236 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
+
 <div id="posts" class="posts-expand">
-<header class="post-header">
+  
+  
 
-	<h1 class="post-title" itemprop="name headline">
-    
-      Tags
-    
-  </h1>
-
-
-
-</header>
+  
 
   
   
-    <div class="tag-cloud">
-      <div class="tag-cloud-title">
+  
+
+  <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/%E5%B7%A5%E5%85%B7/2018/06/27/gdb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CESIGN">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="assets/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NexT">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
           
-            7 tags in total
           
-      </div>
-      <div class="tag-cloud-tags">
+            gdb调试
+          
+        </h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-27T20:00:00+08:00">
+                2018-06-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/#/%E5%B7%A5%E5%85%B7" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+            
+                <div class="post-description">
+                    
+                </div>
+            
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
         
-        
-        
-        
-        
-        
+  
+  
 
 
 
-        <a href="/tag/#/%E5%AD%A6%E4%B9%A0" style="font-size: 30.0px;color: rgb(17,17,17)">学习</a> <a href="/tag/#/%E6%9D%82" style="font-size: 12.0px;color: rgb(204,204,204)">杂</a> <a href="/tag/#/Docker" style="font-size: 12.0px;color: rgb(204,204,204)">Docker</a> <a href="/tag/#/%E5%B7%A5%E5%85%B7" style="font-size: 30.0px;color: rgb(17,17,17)">工具</a> <a href="/tag/#/k8s" style="font-size: 12.0px;color: rgb(204,204,204)">k8s</a> <a href="/tag/#/%E7%AE%97%E6%B3%95" style="font-size: 12.0px;color: rgb(204,204,204)">算法</a> <a href="/tag/#/ros" style="font-size: 12.0px;color: rgb(204,204,204)">ros</a>
-      </div>
+
+
+
+
+
+
+
+
+
+  <h2 id="gdb调试">gdb调试</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>25<br/>26<br/>27<br/>28</pre></td><td class="code"><pre class="highlight"><code>gcc -g  main.c                      //在目标文件加入源代码的信息
+gdb a.out       
+
+(gdb) start                         //开始调试
+(gdb) n                             //一条一条执行
+(gdb) step/s                        //执行下一条，如果函数进入函数
+(gdb) backtrace/bt                  //查看函数调用栈帧
+(gdb) info/i locals                 //查看当前栈帧局部变量
+(gdb) frame/f                       //选择栈帧，再查看局部变量
+(gdb) print/p                       //打印变量的值
+(gdb) finish                        //运行到当前函数返回
+(gdb) set var sum=0                 //修改变量值
+(gdb) list/l 行号或函数名             //列出源码
+(gdb) display/undisplay sum         //每次停下显示变量的值/取消跟踪
+(gdb) break/b  行号或函数名           //设置断点
+(gdb) continue/c                    //连续运行
+(gdb) info/i breakpoints            //查看已经设置的断点
+(gdb) delete breakpoints 2          //删除某个断点
+(gdb) disable/enable breakpoints 3  //禁用/启用某个断点
+(gdb) break 9 if sum != 0           //满足条件才激活断点
+(gdb) run/r                         //重新从程序开头连续执行
+(gdb) watch input[4]                //设置观察点
+(gdb) info/i watchpoints            //查看设置的观察点
+(gdb) x/7b input                    //打印存储器内容，b--每个字节一组，7--7组
+(gdb) disassemble                   //反汇编当前函数或指定函数
+(gdb) si                            // 一条指令一条指令调试 而 s 是一行一行代码
+(gdb) info registers                // 显示所有寄存器的当前值
+(gdb) x/20 $esp                    //查看内存中开始的20个数
+</code></pre></td></tr></tbody></table></div>
+</div>
+
+
+      
     </div>
-  
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            
+            <a href="/tag/#/%E5%B7%A5%E5%85%B7" rel="tag"># 工具</a>
+          
+        </div>
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+        <div class="post-nav" id="post-nav-id">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/%E7%AE%97%E6%B3%95/2018/06/28/alg/" rel="next" title="查找算法">
+                <i class="fa fa-chevron-left"></i> 查找算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/k8s/2018/06/11/k8s1.10/" rel="prev" title="k8s 1.10集群deploy">
+                k8s 1.10集群deploy <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+      
+
+      
+    </footer>
+  </article>
+
+  <div class="post-spread">
+    
+  </div>
 </div>
 
 
@@ -312,6 +506,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -329,10 +527,30 @@
     <div class="sidebar-inner">
 
       
+        
+        
+        
+
+
+
+
+
+
 
       
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/assets/images/avatar.gif"
@@ -403,6 +621,34 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+
+
+
+
+
+
+
+            
+              <div class="post-toc-content">
+    <ol class=nav>
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#gdb调试"> <span class="nav-number">1</span> <span class="nav-text">gdb调试</span> </a> </li>
+    </ol>
+  </div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

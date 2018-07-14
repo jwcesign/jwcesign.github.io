@@ -83,7 +83,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="工具," />
+  <meta name="keywords" content="ros," />
 
 
 
@@ -111,17 +111,23 @@
 
 
 
-<meta name="description" content="“sublime text 3安装“">
-<meta name="keywords" content="工具">
+<meta name="description" content="DDS学习">
+<meta name="keywords" content="ros">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sublime text 3安装">
-<meta property="og:url" content="http://localhost:4000/%E5%B7%A5%E5%85%B7/2018/06/09/sublime/">
+<meta property="og:title" content="DDS学习">
+<meta property="og:url" content="http://localhost:4000/ros/2018/07/14/dds/">
 <meta property="og:site_name" content="NexT">
-<meta property="og:description" content="“sublime text 3安装“">
+<meta property="og:description" content="DDS学习">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-e2811078ee8fbd3ab6397b848f9d3789_hd.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-284789ca930ec5a54744c6b5daafe65c_hd.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-22a3c208f82d52103c14d08af11b6673_hd.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-b92695d69cf98d66ec20293b02d11120_hd.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-cf2c0801b3a59b0174f03e4873c788f6_hd.jpg">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sublime text 3安装">
-<meta name="twitter:description" content="“sublime text 3安装“">
+<meta name="twitter:title" content="DDS学习">
+<meta name="twitter:description" content="DDS学习">
+<meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-e2811078ee8fbd3ab6397b848f9d3789_hd.jpg">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -154,7 +160,7 @@
 
 
 
-  <title>sublime text 3安装 | NexT</title>
+  <title>DDS学习 | NexT</title>
   
 
 
@@ -280,7 +286,7 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/%E5%B7%A5%E5%85%B7/2018/06/09/sublime/">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/ros/2018/07/14/dds/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CESIGN">
@@ -300,7 +306,7 @@
           <h1 class="post-title" itemprop="name headline">
           
           
-            sublime text 3安装
+            DDS学习
           
         </h1>
         
@@ -314,8 +320,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-09T20:00:00+08:00">
-                2018-06-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-14T20:00:00+08:00">
+                2018-07-14
               </time>
             
 
@@ -338,8 +344,8 @@
               
                 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/#/%E5%B7%A5%E5%85%B7" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
+                  <a href="/category/#/ros" itemprop="url" rel="index">
+                    <span itemprop="name">ros</span>
                   </a>
                 </span>
 
@@ -393,98 +399,34 @@
 
 
 
-  <blockquote>
-  <p>“sublime text 3安装“</p>
-</blockquote>
+  <h1 id="dds学习">DDS学习</h1>
 
-<h2 id="问题">问题</h2>
+<h2 id="概念">概念</h2>
+<p>DDS以数据为中心的发布一订阅模型为所有分布式节点之间建立了一个虚拟共享的“全局数据空间(Global Data Space, GDS)。在该模型下分布式节点在网络上以发布或订阅的方式传输数据，节点可以是发布者或订阅者，或者既是发布者又是订阅者。网络中的数据对象用主题((Topic)做标识，分布式节点在全局数据空间中发布或订阅感兴趣的主题信息。各个节点在逻辑上无主从关系，点与点之间都是对等关系.通信方式可以是点对点、点对多、多对多等，在QoS的控制下建立连接，自动发现和配置网络参数,如下图
+<img src="https://pic4.zhimg.com/80/v2-e2811078ee8fbd3ab6397b848f9d3789_hd.jpg" alt="img" /></p>
 
-<p>sublime text 3 mac下的安装，</p>
+<h2 id="dds架构">DDS架构</h2>
+<p><img src="https://pic3.zhimg.com/80/v2-284789ca930ec5a54744c6b5daafe65c_hd.jpg" alt="img" />
+DDS规范有两层，分别是数据本地重构层DLRL（Data Local Reconstruction Layer)和以数据为中心的发布一订阅层DCPS（Data-Centric Publish-Subscribe）。DCPS层是DDS的核心和基础，提供了通信的基本服务；DLRL层将DCPS层提供的服务进行了抽象，在DLRL层建立了与底层服务的映射关系。</p>
 
-<h2 id="软件下载">软件下载</h2>
+<h2 id="dds域domain和域参与者domain-participant">DDS域（Domain）和域参与者（Domain Participant）</h2>
+<p><img src="https://pic4.zhimg.com/80/v2-22a3c208f82d52103c14d08af11b6673_hd.jpg" alt="img" /></p>
 
-<p>去百度云或者官网</p>
+<h2 id="dds组成模型">DDS组成模型</h2>
+<p>DDS内所有的成员都是Entity，DDS中的任两个Entity（实体角色）通信都必须在同一个Domain内进行交互，即他们初始化时DomainID是同一个，并且不同Domain的DomainID必须唯一。Domain内的DomainParticipant是服务的入口点，任何DDS应用都需首先获取DomainParticipant，然后通过Domain Participant获取其他服务，如Publisher、Subscriber、Topic等。
+<img src="https://pic4.zhimg.com/80/v2-b92695d69cf98d66ec20293b02d11120_hd.jpg" alt="img" /></p>
 
-<h2 id="修改host文件">修改host文件</h2>
-
-<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4</pre></td><td class="code"><pre class="highlight"><code>vim /etc/hosts
-//加入下面的类容
-127.0.0.1       www.sublimetext.com
-127.0.0.1       license.sublimehq.com
-</code></pre></td></tr></tbody></table></div>
-</div>
-<h2 id="输入key">输入key</h2>
-
-<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13</pre></td><td class="code"><pre class="highlight"><code>----- BEGIN LICENSE -----
-sgbteam
-Single User License
-EA7E-1153259
-8891CBB9 F1513E4F 1A3405C1 A865D53F
-115F202E 7B91AB2D 0D2A40ED 352B269B
-76E84F0B CD69BFC7 59F2DFEF E267328F
-215652A3 E88F9D8F 4C38E3BA 5B2DAAE4
-969624E7 DC9CD4D5 717FB40C 1B9738CF
-20B3C4F1 E917B5B3 87C38D9C ACCE7DD8
-5F7EF854 86B9743C FADC04AA FB0DA5C0
-F913BE58 42FEA319 F954EFDD AE881E0B
------- END LICENSE ------
-</code></pre></td></tr></tbody></table></div>
-</div>
-
-<h2 id="安装package-control">安装package control</h2>
-
-<p><strong><em>ctrl+`</em></strong> 后输入</p>
-<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code>import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
-</code></pre></td></tr></tbody></table></div>
-</div>
-
-<h2 id="安装插件">安装插件</h2>
-
-<h3 id="markdown插件">markdown插件</h3>
-<p>MarkdownEditing: 修改用户设置(GFM)，修改为下列配置文件（先把default复制到user）</p>
-<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5</pre></td><td class="code"><pre class="highlight"><code>// Layout
-"draw_centered": true,
-"word_wrap": true,
-"wrap_width": 120,
-"rulers": [],
-</code></pre></td></tr></tbody></table></div>
-</div>
-
-<p>MarkdownPreview: 配合上一个插件用</p>
-
-<h3 id="格式化代码相关">格式化代码相关</h3>
-<p>CodeFormatter: 格式化代码，有几种语言不支持
-CoolFormat: 格式化代码
-Alignment：自动对齐插件</p>
-
-<h3 id="注释相关">注释相关</h3>
-<p>DocBlockr：可以快速注释</p>
-
-<h3 id="补全相关">补全相关</h3>
-<p>All Autocomplete: 这个插件扩展了其自动完成的单词列表到所有打开的文件</p>
-
-<h3 id="辅助阅读">辅助阅读</h3>
-<p>BracketHighlighter: 类似于代码匹配，可以匹配括号，引号等符号内的范围。对代码阅读很有帮助。</p>
-
-<h3 id="文件比对">文件比对</h3>
-
-<h3 id="git相关">git相关</h3>
-<p>Git:  这个插件会将Git整合进你的SublimeText，使的你可以在SublimeText中运行Git命令，包括添加，提交文件，查看日志，文件注解以及其它Git功能。
-GitGutter: 这是个十分有用的插件，它会在你最后一次提交Git后显示出有哪些行是被改动过的。</p>
-
-<h3 id="go相关">go相关</h3>
-<p>gosublime: go语言格式化等</p>
-
-<h3 id="目录树相关">目录树相关</h3>
-<p>SideBarEnhancements：可以大大加强在侧栏目录树中右键的选项</p>
-
-<h2 id="设置终端快捷键">设置终端快捷键</h2>
-
-<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code>ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/sublime
-</code></pre></td></tr></tbody></table></div>
-</div>
-
-<p>—— cesign 后记于 2018.06</p>
+<h2 id="几个重要概念">几个重要概念</h2>
+<ul>
+  <li>服务质量策略(QoS)。DDS规范定义了丰富的服务质量策略(Quality of Services Policies)，QoS是一种网络传输策略，应用程序指定所需要的网络传输质量行为，QoS服务实现这种行为要求，尽可能地满足客户对通信质量的需求，DDS定义QoS策略使其对复杂网络环境的适应性和鲁棒性大大增强，优化网络传输质量。QoS可以理解为数据提供者和接收者之间的合约。
+<img src="https://pic2.zhimg.com/80/v2-cf2c0801b3a59b0174f03e4873c788f6_hd.jpg" alt="img" /></li>
+  <li>Domain是一个范围概念，由域号(DomainID ) 唯一标示，只有在同一个域内的通信实体才能通信，不同域内的实体间无任何逻辑关系。</li>
+  <li>Domain Participant作为数据分发服务的入口点，包含若干发布者、订阅者和注册主题，负责创建、删除和管理这些实体。</li>
+  <li>Publisher作为发布者角色，至少包含一个DataWriter，并负责创建、删除和管理DataWriter。同样，Subscribe作为订阅角色，至少与一个DataReader关联，并负责创建、删除和管理DataReader。</li>
+  <li>DataWriter具体负责发布数据，数据发布者通过调用DataWriter的write函数发布数据，但数据不会立刻被送出，实际的消息产生是通过Puhlisher和QoS综合控制的。</li>
+  <li>DataReader负责订阅数据，订阅方式可采用异步方式(Listener)、同步方式(WaitSet)和非阻塞三种。</li>
+  <li>Topic是DataWriter和DataReader相互通信时约定的主题，每个DataWriter/DataReader必须与一个主题绑定，相互通信的DataWriter与DataReader之间的主题数据类型必须相同、QoS必须匹配。另外，Topic必须有确定的数据类型。</li>
+</ul>
 
 
       
@@ -516,7 +458,7 @@ GitGutter: 这是个十分有用的插件，它会在你最后一次提交Git后
         <div class="post-tags">
           
             
-            <a href="/tag/#/%E5%B7%A5%E5%85%B7" rel="tag"># 工具</a>
+            <a href="/tag/#/ros" rel="tag"># ros</a>
           
         </div>
       
@@ -532,18 +474,14 @@ GitGutter: 这是个十分有用的插件，它会在你最后一次提交Git后
         <div class="post-nav" id="post-nav-id">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/k8s/2018/06/11/k8s1.10/" rel="next" title="k8s 1.10集群deploy">
-                <i class="fa fa-chevron-left"></i> k8s 1.10集群deploy
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/k8s/2018/06/06/k8s/" rel="prev" title="k8s架构">
-                k8s架构 <i class="fa fa-chevron-right"></i>
+              <a href="/%E7%AE%97%E6%B3%95/2018/06/28/alg/" rel="prev" title="查找算法">
+                查找算法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -701,7 +639,7 @@ GitGutter: 这是个十分有用的插件，它会在你最后一次提交Git后
             
               <div class="post-toc-content">
     <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#问题"> <span class="nav-number">1</span> <span class="nav-text">问题</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#软件下载"> <span class="nav-number">2</span> <span class="nav-text">软件下载</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#修改host文件"> <span class="nav-number">3</span> <span class="nav-text">修改host文件</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#输入key"> <span class="nav-number">4</span> <span class="nav-text">输入key</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#安装package-control"> <span class="nav-number">5</span> <span class="nav-text">安装package control</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#安装插件"> <span class="nav-number">6</span> <span class="nav-text">安装插件</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#markdown插件"> <span class="nav-number">6.1</span> <span class="nav-text">markdown插件</span> </a> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#格式化代码相关"> <span class="nav-number">6.2</span> <span class="nav-text">格式化代码相关</span> </a> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#注释相关"> <span class="nav-number">6.3</span> <span class="nav-text">注释相关</span> </a> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#补全相关"> <span class="nav-number">6.4</span> <span class="nav-text">补全相关</span> </a> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#辅助阅读"> <span class="nav-number">6.5</span> <span class="nav-text">辅助阅读</span> </a> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#文件比对"> <span class="nav-number">6.6</span> <span class="nav-text">文件比对</span> </a> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#git相关"> <span class="nav-number">6.7</span> <span class="nav-text">git相关</span> </a> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#go相关"> <span class="nav-number">6.8</span> <span class="nav-text">go相关</span> </a> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#目录树相关"> <span class="nav-number">6.9</span> <span class="nav-text">目录树相关</span> </a> </li> </ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#设置终端快捷键"> <span class="nav-number">7</span> <span class="nav-text">设置终端快捷键</span> </a> </li>
+      <li class="nav-item nav-level-1"> <a class="nav-link" href="#dds学习"> <span class="nav-number">1</span> <span class="nav-text">DDS学习</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-2"> <a class="nav-link" href="#概念"> <span class="nav-number">1.1</span> <span class="nav-text">概念</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#dds架构"> <span class="nav-number">1.2</span> <span class="nav-text">DDS架构</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#dds域domain和域参与者domain-participant"> <span class="nav-number">1.3</span> <span class="nav-text">DDS域（Domain）和域参与者（Domain Participant）</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#dds组成模型"> <span class="nav-number">1.4</span> <span class="nav-text">DDS组成模型</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#几个重要概念"> <span class="nav-number">1.5</span> <span class="nav-text">几个重要概念</span> </a> </li> </ol> </li>
     </ol>
   </div>
             

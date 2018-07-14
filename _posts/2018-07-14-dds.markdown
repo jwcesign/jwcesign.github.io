@@ -1,0 +1,35 @@
+---
+title:      "DDS学习"
+date:       2018-07-14 12:00:00
+categories:
+- ros
+tags:
+    - ros
+---
+
+# DDS学习
+
+## 概念
+DDS以数据为中心的发布一订阅模型为所有分布式节点之间建立了一个虚拟共享的“全局数据空间(Global Data Space, GDS)。在该模型下分布式节点在网络上以发布或订阅的方式传输数据，节点可以是发布者或订阅者，或者既是发布者又是订阅者。网络中的数据对象用主题((Topic)做标识，分布式节点在全局数据空间中发布或订阅感兴趣的主题信息。各个节点在逻辑上无主从关系，点与点之间都是对等关系.通信方式可以是点对点、点对多、多对多等，在QoS的控制下建立连接，自动发现和配置网络参数,如下图
+![img](https://pic4.zhimg.com/80/v2-e2811078ee8fbd3ab6397b848f9d3789_hd.jpg)
+
+## DDS架构
+![img](https://pic3.zhimg.com/80/v2-284789ca930ec5a54744c6b5daafe65c_hd.jpg)
+DDS规范有两层，分别是数据本地重构层DLRL（Data Local Reconstruction Layer)和以数据为中心的发布一订阅层DCPS（Data-Centric Publish-Subscribe）。DCPS层是DDS的核心和基础，提供了通信的基本服务；DLRL层将DCPS层提供的服务进行了抽象，在DLRL层建立了与底层服务的映射关系。
+
+## DDS域（Domain）和域参与者（Domain Participant）
+![img](https://pic4.zhimg.com/80/v2-22a3c208f82d52103c14d08af11b6673_hd.jpg)
+
+## DDS组成模型
+DDS内所有的成员都是Entity，DDS中的任两个Entity（实体角色）通信都必须在同一个Domain内进行交互，即他们初始化时DomainID是同一个，并且不同Domain的DomainID必须唯一。Domain内的DomainParticipant是服务的入口点，任何DDS应用都需首先获取DomainParticipant，然后通过Domain Participant获取其他服务，如Publisher、Subscriber、Topic等。
+![img](https://pic4.zhimg.com/80/v2-b92695d69cf98d66ec20293b02d11120_hd.jpg)
+
+## 几个重要概念
+* 服务质量策略(QoS)。DDS规范定义了丰富的服务质量策略(Quality of Services Policies)，QoS是一种网络传输策略，应用程序指定所需要的网络传输质量行为，QoS服务实现这种行为要求，尽可能地满足客户对通信质量的需求，DDS定义QoS策略使其对复杂网络环境的适应性和鲁棒性大大增强，优化网络传输质量。QoS可以理解为数据提供者和接收者之间的合约。
+![img](https://pic2.zhimg.com/80/v2-cf2c0801b3a59b0174f03e4873c788f6_hd.jpg)
+* Domain是一个范围概念，由域号(DomainID ) 唯一标示，只有在同一个域内的通信实体才能通信，不同域内的实体间无任何逻辑关系。
+* Domain Participant作为数据分发服务的入口点，包含若干发布者、订阅者和注册主题，负责创建、删除和管理这些实体。
+* Publisher作为发布者角色，至少包含一个DataWriter，并负责创建、删除和管理DataWriter。同样，Subscribe作为订阅角色，至少与一个DataReader关联，并负责创建、删除和管理DataReader。
+* DataWriter具体负责发布数据，数据发布者通过调用DataWriter的write函数发布数据，但数据不会立刻被送出，实际的消息产生是通过Puhlisher和QoS综合控制的。
+* DataReader负责订阅数据，订阅方式可采用异步方式(Listener)、同步方式(WaitSet)和非阻塞三种。
+* Topic是DataWriter和DataReader相互通信时约定的主题，每个DataWriter/DataReader必须与一个主题绑定，相互通信的DataWriter与DataReader之间的主题数据类型必须相同、QoS必须匹配。另外，Topic必须有确定的数据类型。
