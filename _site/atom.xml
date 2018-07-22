@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-07-14T22:02:37+08:00</updated><id>http://localhost:4000/</id><title type="html">NexT</title><subtitle>Keep going, keep leaning.</subtitle><author><name>CESIGN</name></author><entry><title type="html">DDS学习</title><link href="http://localhost:4000/ros/2018/07/14/dds/" rel="alternate" type="text/html" title="DDS学习" /><published>2018-07-14T20:00:00+08:00</published><updated>2018-07-14T20:00:00+08:00</updated><id>http://localhost:4000/ros/2018/07/14/dds</id><content type="html" xml:base="http://localhost:4000/ros/2018/07/14/dds/">&lt;h1 id=&quot;dds学习&quot;&gt;DDS学习&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-07-16T16:10:35+08:00</updated><id>http://localhost:4000/</id><title type="html">NexT</title><subtitle>Keep going, keep leaning.</subtitle><author><name>CESIGN</name></author><entry><title type="html">DDS学习</title><link href="http://localhost:4000/ros/2018/07/14/dds/" rel="alternate" type="text/html" title="DDS学习" /><published>2018-07-14T20:00:00+08:00</published><updated>2018-07-14T20:00:00+08:00</updated><id>http://localhost:4000/ros/2018/07/14/dds</id><content type="html" xml:base="http://localhost:4000/ros/2018/07/14/dds/">&lt;h1 id=&quot;dds学习&quot;&gt;DDS学习&lt;/h1&gt;
 
 &lt;h2 id=&quot;概念&quot;&gt;概念&lt;/h2&gt;
 &lt;p&gt;DDS以数据为中心的发布一订阅模型为所有分布式节点之间建立了一个虚拟共享的“全局数据空间(Global Data Space, GDS)。在该模型下分布式节点在网络上以发布或订阅的方式传输数据，节点可以是发布者或订阅者，或者既是发布者又是订阅者。网络中的数据对象用主题((Topic)做标识，分布式节点在全局数据空间中发布或订阅感兴趣的主题信息。各个节点在逻辑上无主从关系，点与点之间都是对等关系.通信方式可以是点对点、点对多、多对多等，在QoS的控制下建立连接，自动发现和配置网络参数,如下图
@@ -25,6 +25,12 @@ DDS规范有两层，分别是数据本地重构层DLRL（Data Local Reconstruct
   &lt;li&gt;DataWriter具体负责发布数据，数据发布者通过调用DataWriter的write函数发布数据，但数据不会立刻被送出，实际的消息产生是通过Puhlisher和QoS综合控制的。&lt;/li&gt;
   &lt;li&gt;DataReader负责订阅数据，订阅方式可采用异步方式(Listener)、同步方式(WaitSet)和非阻塞三种。&lt;/li&gt;
   &lt;li&gt;Topic是DataWriter和DataReader相互通信时约定的主题，每个DataWriter/DataReader必须与一个主题绑定，相互通信的DataWriter与DataReader之间的主题数据类型必须相同、QoS必须匹配。另外，Topic必须有确定的数据类型。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;dds官方文档阅读&quot;&gt;DDS官方文档阅读&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;The purpose of the DDS specification can be summarized as enabling the “Efficient and Robust Delivery of the Right
+Information to the Right Place at the Right Time.”&lt;/li&gt;
 &lt;/ul&gt;</content><author><name>CESIGN</name></author><category term="ros" /><summary type="html">DDS学习</summary></entry><entry><title type="html">查找算法</title><link href="http://localhost:4000/%E7%AE%97%E6%B3%95/2018/06/28/alg/" rel="alternate" type="text/html" title="查找算法" /><published>2018-06-28T20:00:00+08:00</published><updated>2018-06-28T20:00:00+08:00</updated><id>http://localhost:4000/%E7%AE%97%E6%B3%95/2018/06/28/alg</id><content type="html" xml:base="http://localhost:4000/%E7%AE%97%E6%B3%95/2018/06/28/alg/">&lt;h1 id=&quot;查找算法&quot;&gt;查找算法&lt;/h1&gt;
 
 &lt;h2 id=&quot;顺序查找&quot;&gt;顺序查找&lt;/h2&gt;
@@ -350,7 +356,6 @@ DDS规范有两层，分别是数据本地重构层DLRL（Data Local Reconstruct
 &lt;ul&gt;
   &lt;li&gt;是2-3树的一种实现。&lt;/li&gt;
   &lt;li&gt;原理：&lt;a href=&quot;https://blog.csdn.net/u014688145/article/details/68489582&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;</content><author><name>CESIGN</name></author><category term="算法" /><summary type="html">查找算法</summary></entry><entry><title type="html">gdb调试</title><link href="http://localhost:4000/%E5%B7%A5%E5%85%B7/2018/06/27/gdb/" rel="alternate" type="text/html" title="gdb调试" /><published>2018-06-27T20:00:00+08:00</published><updated>2018-06-27T20:00:00+08:00</updated><id>http://localhost:4000/%E5%B7%A5%E5%85%B7/2018/06/27/gdb</id><content type="html" xml:base="http://localhost:4000/%E5%B7%A5%E5%85%B7/2018/06/27/gdb/">&lt;h2 id=&quot;gdb调试&quot;&gt;gdb调试&lt;/h2&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gcc -g  main.c                      //在目标文件加入源代码的信息

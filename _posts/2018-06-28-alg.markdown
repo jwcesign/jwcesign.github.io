@@ -319,4 +319,3 @@ int main()
 ## 红黑查找树
 * 是2-3树的一种实现。
 * 原理：[link](https://blog.csdn.net/u014688145/article/details/68489582)
-* 

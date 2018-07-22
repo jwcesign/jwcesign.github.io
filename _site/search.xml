@@ -32,6 +32,13 @@ DDS内所有的成员都是Entity，DDS中的任两个Entity（实体角色）�
   DataReader负责订阅数据，订阅方式可采用异步方式(Listener)、同步方式(WaitSet)和非阻塞三种。
   Topic是DataWriter和DataReader相互通信时约定的主题，每个DataWriter/DataReader必须与一个主题绑定，相互通信的DataWriter与DataReader之间的主题数据类型必须相同、QoS必须匹配。另外，Topic必须有确定的数据类型。
 
+
+DDS官方文档阅读
+
+  The purpose of the DDS specification can be summarized as enabling the “Efficient and Robust Delivery of the Right
+Information to the Right Place at the Right Time.”
+
+
 </content>
       <categories>
         
@@ -374,7 +381,6 @@ int main()
 
   是2-3树的一种实现。
   原理：link
-  
 
 </content>
       <categories>

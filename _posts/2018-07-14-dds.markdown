@@ -33,3 +33,15 @@ DDS内所有的成员都是Entity，DDS中的任两个Entity（实体角色）�
 * DataWriter具体负责发布数据，数据发布者通过调用DataWriter的write函数发布数据，但数据不会立刻被送出，实际的消息产生是通过Puhlisher和QoS综合控制的。
 * DataReader负责订阅数据，订阅方式可采用异步方式(Listener)、同步方式(WaitSet)和非阻塞三种。
 * Topic是DataWriter和DataReader相互通信时约定的主题，每个DataWriter/DataReader必须与一个主题绑定，相互通信的DataWriter与DataReader之间的主题数据类型必须相同、QoS必须匹配。另外，Topic必须有确定的数据类型。
+
+
+## DDS官方文档阅读
+* The purpose of the DDS specification can be summarized as enabling the “Efficient and Robust Delivery of the Right
+Information to the Right Place at the Right Time.”
+
+## 补充
+OMG IDL Stubs and Skeletons(IDL stubs and skeletons serve as a “glue” between the client and servants, respectively, and the ORB),IDL Compiler(An IDL compiler transforms OMG IDL definitions into stubs and skeletons),Dynamic Invocation Interface(Dynamic Invocation Interface (DII): The DII allows clients to generate requests at run-time), Dynamic Skeleton Interface(The DSI allows an ORB to deliver requests to servants that have no compile-time knowledge of the IDL interface they implement), Object Adapter(Object Adapters enable ORBs to support various types of servants that possess similar requirements),Interface Repository(The Interface Repository provides run-time information about IDL interfaces),Implementation Repository(The Implementation Repository contains information that allows an ORB to activate servers to process servants).
+
+CORBA适用场景：RPC-style applications that possess “best-effort” quality of service (QoS) requirements.
+CORBA不适用场景： high-performance, real-time applications for the fol- lowing reasons.
+REASON:(1)Lack of QoS specification interfaces;(2)Lack of QoS enforcement;(3)Lack of real-time programming features:(4)Lack of performance optimizations;(5)
