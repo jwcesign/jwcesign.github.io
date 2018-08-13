@@ -45,3 +45,40 @@ OMG IDL Stubs and Skeletons(IDL stubs and skeletons serve as a “glue” betwee
 CORBA适用场景：RPC-style applications that possess “best-effort” quality of service (QoS) requirements.
 CORBA不适用场景： high-performance, real-time applications for the fol- lowing reasons.
 REASON:(1)Lack of QoS specification interfaces;(2)Lack of QoS enforcement;(3)Lack of real-time programming features:(4)Lack of performance optimizations;(5)
+
+## 文档阅读
+
+
+
+1. 各膜的全称及作用
+  1.1 AMQP: The Advanced Message Queuing Protocol
+      作用: designed to address applications requiring fast and reliable business transactions.
+  1.2 JMS: Java Message Service API
+      作用:  designed to address applications requiring fast and reliable business transactions, JMS is focused on Java-centric systems  
+  1.3 MQTT:  Message Queuing Telemetry Transport 
+      作用: provides a simple and lightweight device data collection solution
+  1.4 REST: Representational state transfer
+      作用:  provides a simple client-server (request/reply) style of communications that is useful for systems that need to communicate over the Internet, but it cannot provide asynchronous loosely coupled publish-and-subscribe message exchanges. 
+ahdjkahsdjhajkshdfjkhajkdfhakhfjkhajskdhfkashkdfhkasdfasd
+
+## 7/29任务
+消息中间件，实时系统，嵌入式，AI算子，
+### 嵌入式,嵌入式
+* Dr. Basel Halak: [link](https://www.ecs.soton.ac.uk/people/bh9)
+  * 嵌入式教授
+  * 关注嵌入式安全和功耗
+* Professor Bashir Al-Hashimi: [link](https://www.ecs.soton.ac.uk/people/bmah#publications)
+  * 嵌入式教授，比较牛
+  * 关注嵌入式系统中的低功耗，如实时系统中的低功耗，关系power-efficient的论文较多
+
+
+## Real-time比较
+TAO为满足QoS所做的操作：
+1. 高速网路适配器：一个或多个ATM接口控制器芯片(APIC)互相连接而组成的菊花链 .APIC能作为一个系统/网络接口使用，也能作为I/O接口芯片组使用.
+2. 实时I/O系统：通过避免优先级倒置来提高实时性，用一个核心线程池专用处理协议并且用应用程序的线程关联这些线程. 这些核心线程运行在与应用程序线程同样的优先级别, 这样能防止多种实时调度事故的发生如优先反演和隐藏调度.
+3. 实时调度:TAO通过支持周期性实时应用程序的实时I/O调度类来确保支持QoS. 一旦实时I/O类的一个线程被操作系统接纳, 调度程序将负责(1) 计算在类中相关的其它线程的优先级并且(2)周期性地分发这些线程以使它们在最后期限是满足的.
+4. 输入控制器:输入控制允许操作系统要么确保指定的计算时间，要么拒绝接收线程. 输入控制对于实时系统在确定和统计QoS需求方面很有用处.
+5. 实时对象适配器:TAO使用de-分层多路分解 (Figure 4(B)).这种近似使用多路分解键(demultiplexing keys)的方式把ORB指派给客户端. 这些键映射客户请求到对象/操作在O(1)时间里不需要任何的哈西运算或搜索.
+[img](http://docs.huihoo.com/ace_tao/i/corba_demux2.gif)
+
+
