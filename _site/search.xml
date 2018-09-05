@@ -39,6 +39,57 @@ DDS官方文档阅读
 Information to the Right Place at the Right Time.”
 
 
+补充
+OMG IDL Stubs and Skeletons(IDL stubs and skeletons serve as a “glue” between the client and servants, respectively, and the ORB),IDL Compiler(An IDL compiler transforms OMG IDL definitions into stubs and skeletons),Dynamic Invocation Interface(Dynamic Invocation Interface (DII): The DII allows clients to generate requests at run-time), Dynamic Skeleton Interface(The DSI allows an ORB to deliver requests to servants that have no compile-time knowledge of the IDL interface they implement), Object Adapter(Object Adapters enable ORBs to support various types of servants that possess similar requirements),Interface Repository(The Interface Repository provides run-time information about IDL interfaces),Implementation Repository(The Implementation Repository contains information that allows an ORB to activate servers to process servants).
+
+CORBA适用场景：RPC-style applications that possess “best-effort” quality of service (QoS) requirements.
+CORBA不适用场景： high-performance, real-time applications for the fol- lowing reasons.
+REASON:(1)Lack of QoS specification interfaces;(2)Lack of QoS enforcement;(3)Lack of real-time programming features:(4)Lack of performance optimizations;(5)
+
+文档阅读
+
+
+  各膜的全称及作用
+  1.1 AMQP: The Advanced Message Queuing Protocol
+   作用: designed to address applications requiring fast and reliable business transactions.
+  1.2 JMS: Java Message Service API
+   作用:  designed to address applications requiring fast and reliable business transactions, JMS is focused on Java-centric systems
+  1.3 MQTT:  Message Queuing Telemetry Transport 
+   作用: provides a simple and lightweight device data collection solution
+  1.4 REST: Representational state transfer
+   作用:  provides a simple client-server (request/reply) style of communications that is useful for systems that need to communicate over the Internet, but it cannot provide asynchronous loosely coupled publish-and-subscribe message exchanges. 
+ahdjkahsdjhajkshdfjkhajkdfhakhfjkhajskdhfkashkdfhkasdfasd
+
+
+7/29任务
+消息中间件，实时系统，嵌入式，AI算子，
+嵌入式,嵌入式
+
+  Dr. Basel Halak: link
+    
+      嵌入式教授
+      关注嵌入式安全和功耗
+    
+  
+  Professor Bashir Al-Hashimi: link
+    
+      嵌入式教授，比较牛
+      关注嵌入式系统中的低功耗，如实时系统中的低功耗，关系power-efficient的论文较多
+    
+  
+
+
+Real-time比较
+TAO为满足QoS所做的操作：
+
+  高速网路适配器：一个或多个ATM接口控制器芯片(APIC)互相连接而组成的菊花链 .APIC能作为一个系统/网络接口使用，也能作为I/O接口芯片组使用.
+  实时I/O系统：通过避免优先级倒置来提高实时性，用一个核心线程池专用处理协议并且用应用程序的线程关联这些线程. 这些核心线程运行在与应用程序线程同样的优先级别, 这样能防止多种实时调度事故的发生如优先反演和隐藏调度.
+  实时调度:TAO通过支持周期性实时应用程序的实时I/O调度类来确保支持QoS. 一旦实时I/O类的一个线程被操作系统接纳, 调度程序将负责(1) 计算在类中相关的其它线程的优先级并且(2)周期性地分发这些线程以使它们在最后期限是满足的.
+  输入控制器:输入控制允许操作系统要么确保指定的计算时间，要么拒绝接收线程. 输入控制对于实时系统在确定和统计QoS需求方面很有用处.
+  实时对象适配器:TAO使用de-分层多路分解 (Figure 4(B)).这种近似使用多路分解键(demultiplexing keys)的方式把ORB指派给客户端. 这些键映射客户请求到对象/操作在O(1)时间里不需要任何的哈西运算或搜索.
+img
+
+
 </content>
       <categories>
         
@@ -259,112 +310,199 @@ int main()
   代码实现：
 
 
-#include &amp;lt;stdio.h&amp;gt;
-#include &amp;lt;stdlib.h&amp;gt;
+#include&amp;lt;stdio.h&amp;gt;
+#include&amp;lt;stdlib.h&amp;gt;
 
-#define SIZE 10
-
-typedef struct binary_node{
-  int value;
-  struct binary_node* left;
-  struct binary_node* right;
-}bin_node;
+#define RED   'R'
+#define BLACK 'B'
 
 
-void insert_node(bin_node* root,bin_node* child)
+typedef struct Node {
+    int          key;
+    char         color;
+    struct Node *left;
+    struct Node *right;
+    struct Node *parent;
+} Node;
+
+// Based on CLRS algorithm, use T_Nil as a sentinel to simplify code
+struct Node  T_Nil_Node;
+Node* T_Nil = &amp;amp;T_Nil_Node;
+
+Node* Root = NULL;
+
+// A utility function to create a new BST node
+Node* newNode(int key)
 {
-  if (child-&amp;gt;value &amp;gt;= root-&amp;gt;value &amp;amp;&amp;amp; root-&amp;gt;right != NULL)
-  {
-    insert_node(root-&amp;gt;right,child);
-  }
-  if (child-&amp;gt;value &amp;lt; root-&amp;gt;value &amp;amp;&amp;amp; root-&amp;gt;left != NULL)
-  {
-    insert_node(root-&amp;gt;left,child);
-  }
-  if (child-&amp;gt;value &amp;gt;= root-&amp;gt;value &amp;amp;&amp;amp; root-&amp;gt;right == NULL)
-  {
-    root-&amp;gt;right = child;
-  }
-  if (child-&amp;gt;value &amp;lt; root-&amp;gt;value &amp;amp;&amp;amp; root-&amp;gt;left == NULL)
-  {
-    root-&amp;gt;left = child;
-  }
+    Node *temp   = (Node*) malloc(sizeof(Node));
+    temp-&amp;gt;key    = key;
+    temp-&amp;gt;color  = RED;
+    temp-&amp;gt;left   = NULL;
+    temp-&amp;gt;right  = NULL;
+    temp-&amp;gt;parent = NULL;
+
+    return temp;
 }
 
-void create_tree(bin_node** root, int array[], int size)
+void rotateLeft( Node** T, Node* x)
 {
-  int i;
-  *root = (bin_node*)malloc(sizeof(bin_node)); 
-  (*root)-&amp;gt;value = array[0];
-  (*root)-&amp;gt;left = NULL;
-  (*root)-&amp;gt;right = NULL;
-  for (i=1; i&amp;lt;size;i++)
-  {
-    bin_node* child = (bin_node*)malloc(sizeof(bin_node));
-    child-&amp;gt;value = array[i];
-    child-&amp;gt;left = NULL;
-    child-&amp;gt;right = NULL;
-    insert_node(*root,child);
-  }
+    Node *y  = x-&amp;gt;right;    // set y
+    x-&amp;gt;right = y-&amp;gt;left;     // turn y's left subtree into x's right subtree{
+    if (y-&amp;gt;left != T_Nil)
+        y-&amp;gt;left-&amp;gt;parent = x;
+    y-&amp;gt;parent = x-&amp;gt;parent;  // link x's parent to y
+    if (x-&amp;gt;parent == T_Nil)
+        *T = y;
+    else if (x == x-&amp;gt;parent-&amp;gt;left)
+        x-&amp;gt;parent-&amp;gt;left = y;
+    else
+        x-&amp;gt;parent-&amp;gt;right = y;
+    y-&amp;gt;left   = x;            // put x on y's left
+    x-&amp;gt;parent = y;
 }
 
-void dis_node(bin_node* node)
+void rotateRight(Node** T, Node* y)
 {
-  if (node == NULL)
-    return;
-  if (node-&amp;gt;left != NULL)
-  {
-    dis_node(node-&amp;gt;left);
-  }
-  printf(&quot;%d &quot;,node-&amp;gt;value);
-  if (node-&amp;gt;right != NULL)
-  {
-    dis_node(node-&amp;gt;right);
-  }
+    Node *x  = y-&amp;gt;left;     // set x
+    y-&amp;gt;left  = x-&amp;gt;right;    // turn x's right subtree into y's left subtree{
+    if (x-&amp;gt;right != T_Nil)
+        x-&amp;gt;right-&amp;gt;parent = y;
+    x-&amp;gt;parent = y-&amp;gt;parent;  // link y's parent to x
+    if (y-&amp;gt;parent == T_Nil)
+        *T = x;
+    else if (y == y-&amp;gt;parent-&amp;gt;right)
+        y-&amp;gt;parent-&amp;gt;right = x;
+    else
+        y-&amp;gt;parent-&amp;gt;left  = x;
+    x-&amp;gt;right  = y;         // put y on x's right
+    y-&amp;gt;parent = x;
 }
 
-bin_node* search_node(bin_node* node, int value)
+void redBlackInsertFixup(Node** Root, Node* New)
 {
-  if (node == NULL)
-  {
-    return NULL;
-  }
-  if (value == node-&amp;gt;value)
-  {
-    return node;
-  }
-  if (value &amp;gt; node-&amp;gt;value)
-  {
-    return search_node(node-&amp;gt;right,value);
-  }
-  if (value &amp;lt; node-&amp;gt;value)
-  {
-    return search_node(node-&amp;gt;left,value);
-  }
-  return NULL;
+    Node* temp;
+    while (New-&amp;gt;parent-&amp;gt;color == RED)
+    {
+        if (New-&amp;gt;parent == New-&amp;gt;parent-&amp;gt;parent-&amp;gt;left)
+        {
+            temp = New-&amp;gt;parent-&amp;gt;parent-&amp;gt;right;
+            if (temp-&amp;gt;color == RED)
+            {
+                New-&amp;gt;parent-&amp;gt;color = BLACK;
+                temp-&amp;gt;color = BLACK;
+                New-&amp;gt;parent-&amp;gt;parent-&amp;gt;color = RED;
+                New = New-&amp;gt;parent-&amp;gt;parent;
+            }
+            else {
+                if (New == New-&amp;gt;parent-&amp;gt;right)
+                {
+                    New = New-&amp;gt;parent;
+                    rotateLeft(Root, New);
+                }
+                New-&amp;gt;parent-&amp;gt;color = BLACK;
+                New-&amp;gt;parent-&amp;gt;parent-&amp;gt;color = RED;
+                rotateRight(Root, New-&amp;gt;parent-&amp;gt;parent);
+            }
+        }
+        else
+        {
+            temp = New-&amp;gt;parent-&amp;gt;parent-&amp;gt;left;
+            if (temp-&amp;gt;color == RED)
+            {
+                New-&amp;gt;parent-&amp;gt;color = BLACK;
+                New-&amp;gt;color = BLACK;
+                New-&amp;gt;parent-&amp;gt;parent-&amp;gt;color = RED;
+                New = New-&amp;gt;parent-&amp;gt;parent;
+            }
+            else {
+                if (New == New-&amp;gt;parent-&amp;gt;left)
+                {
+                    New = New-&amp;gt;parent;
+                    rotateRight(Root, New);
+                }
+                New-&amp;gt;parent-&amp;gt;color = BLACK;
+                New-&amp;gt;parent-&amp;gt;parent-&amp;gt;color = RED;
+                rotateLeft(Root, New-&amp;gt;parent-&amp;gt;parent);
+            }
+        }
+    }
+    Root[0]-&amp;gt;color = BLACK;
+}
+void redBlackInsert(Node** T, int key)
+{
+    Node* z =  newNode(key);
+    Node* y =  T_Nil;
+    Node* x = *T;
+
+    // Find where to Insert new node Z into the binary search tree
+    while (x != T_Nil) {
+        y = x;
+        if (z-&amp;gt;key &amp;lt; x-&amp;gt;key)
+            x = x-&amp;gt;left;
+        else
+            x = x-&amp;gt;right;
+    }
+
+    z-&amp;gt;parent = y;
+    if (y == T_Nil)
+        *T = z;
+    else if (z-&amp;gt;key &amp;lt; y-&amp;gt;key)
+        y-&amp;gt;left  = z;
+    else
+        y-&amp;gt;right = z;
+
+    // Init z as a red leaf
+    z-&amp;gt;left  = T_Nil;
+    z-&amp;gt;right = T_Nil;
+    z-&amp;gt;color = RED;
+
+    // Ensure the Red-Black property is maintained
+    redBlackInsertFixup(T, z);
 }
 
-
-int main()
+//中序遍历
+void printTree(Node* root)
 {
-  int array[SIZE] = {4,1,45,78,345,23,12,3,6,21};
-  bin_node* root = NULL;
-  bin_node* search_result = NULL;
-  int search_value;
-  create_tree(&amp;amp;root,array,SIZE);
-  dis_node(root);
-  printf(&quot;\nPlease input value to search:&quot;);
-  scanf(&quot;%d&quot;,&amp;amp;search_value);
-  search_result = search_node(root,search_value);
-  if (search_result != NULL)
-  {
-    printf(&quot;Yes\n&quot;)&amp;amp;;
-  }
-  else
-  {
-    printf(&quot;No\n&quot;);
-  }
-  return 0;
+    if (root-&amp;gt;left != T_Nil)
+        printTree(root-&amp;gt;left);
+    printf(&quot;%d &quot;, root-&amp;gt;key);
+    if (root-&amp;gt;right != T_Nil)
+        printTree(root-&amp;gt;right);
+}
+
+void findNode(Node* root,int key)
+{
+    if (root-&amp;gt;key == key)
+    {
+        printf(&quot;\nYes\n&quot;);
+        return;
+    }
+    else
+    {
+        if (root-&amp;gt;key &amp;gt; key)
+            if (root-&amp;gt;left != T_Nil)
+                findNode(root-&amp;gt;left,key);
+            else
+                return;
+        else
+            if (root-&amp;gt;right != T_Nil)
+                findNode(root-&amp;gt;right,key);
+            else
+                return;
+    }
+}
+
+int main(int argc, char* argv[])
+{
+    Node* Root = T_Nil;
+    int list[10] = {1, 3, 2, 5, 4, 7, 6, 9, 8, 10};
+    for (int i = 0; i &amp;lt; 10; i++)
+    {
+        //printf(&quot;%d &quot;, list[i]);
+        redBlackInsert(&amp;amp;Root, list[i]);
+    }
+    printTree(Root);
+    findNode(Root,8);
 }
 
 
@@ -381,6 +519,307 @@ int main()
 
   是2-3树的一种实现。
   原理：link
+  代码实现：
+
+
+#include&amp;lt;stdio.h&amp;gt;
+#include&amp;lt;stdlib.h&amp;gt;
+
+#define RED   'R'
+#define BLACK 'B'
+
+
+typedef struct Node {
+    int          key;
+    char         color;
+    struct Node *left;
+    struct Node *right;
+    struct Node *parent;
+} Node;
+
+// Based on CLRS algorithm, use T_Nil as a sentinel to simplify code
+struct Node  T_Nil_Node;
+Node* T_Nil = &amp;amp;T_Nil_Node;
+
+Node* Root = NULL;
+
+// A utility function to create a new BST node
+Node* newNode(int key)
+{
+    Node *temp   = (Node*) malloc(sizeof(Node));
+    temp-&amp;gt;key    = key;
+    temp-&amp;gt;color  = RED;
+    temp-&amp;gt;left   = NULL;
+    temp-&amp;gt;right  = NULL;
+    temp-&amp;gt;parent = NULL;
+
+    return temp;
+}
+
+void rotateLeft( Node** T, Node* x)
+{
+    Node *y  = x-&amp;gt;right;    // set y
+    x-&amp;gt;right = y-&amp;gt;left;     // turn y's left subtree into x's right subtree{
+    if (y-&amp;gt;left != T_Nil)
+        y-&amp;gt;left-&amp;gt;parent = x;
+    y-&amp;gt;parent = x-&amp;gt;parent;  // link x's parent to y
+    if (x-&amp;gt;parent == T_Nil)
+        *T = y;
+    else if (x == x-&amp;gt;parent-&amp;gt;left)
+        x-&amp;gt;parent-&amp;gt;left = y;
+    else
+        x-&amp;gt;parent-&amp;gt;right = y;
+    y-&amp;gt;left   = x;            // put x on y's left
+    x-&amp;gt;parent = y;
+}
+
+void rotateRight(Node** T, Node* y)
+{
+    Node *x  = y-&amp;gt;left;     // set x
+    y-&amp;gt;left  = x-&amp;gt;right;    // turn x's right subtree into y's left subtree{
+    if (x-&amp;gt;right != T_Nil)
+        x-&amp;gt;right-&amp;gt;parent = y;
+    x-&amp;gt;parent = y-&amp;gt;parent;  // link y's parent to x
+    if (y-&amp;gt;parent == T_Nil)
+        *T = x;
+    else if (y == y-&amp;gt;parent-&amp;gt;right)
+        y-&amp;gt;parent-&amp;gt;right = x;
+    else
+        y-&amp;gt;parent-&amp;gt;left  = x;
+    x-&amp;gt;right  = y;         // put y on x's right
+    y-&amp;gt;parent = x;
+}
+
+void redBlackInsertFixup(Node** Root, Node* New)
+{
+    Node* temp;
+    while (New-&amp;gt;parent-&amp;gt;color == RED)
+    {
+        if (New-&amp;gt;parent == New-&amp;gt;parent-&amp;gt;parent-&amp;gt;left)
+        {
+            temp = New-&amp;gt;parent-&amp;gt;parent-&amp;gt;right;
+            if (temp-&amp;gt;color == RED)
+            {
+                New-&amp;gt;parent-&amp;gt;color = BLACK;
+                temp-&amp;gt;color = BLACK;
+                New-&amp;gt;parent-&amp;gt;parent-&amp;gt;color = RED;
+                New = New-&amp;gt;parent-&amp;gt;parent;
+            }
+            else {
+                if (New == New-&amp;gt;parent-&amp;gt;right)
+                {
+                    New = New-&amp;gt;parent;
+                    rotateLeft(Root, New);
+                }
+                New-&amp;gt;parent-&amp;gt;color = BLACK;
+                New-&amp;gt;parent-&amp;gt;parent-&amp;gt;color = RED;
+                rotateRight(Root, New-&amp;gt;parent-&amp;gt;parent);
+            }
+        }
+        else
+        {
+            temp = New-&amp;gt;parent-&amp;gt;parent-&amp;gt;left;
+            if (temp-&amp;gt;color == RED)
+            {
+                New-&amp;gt;parent-&amp;gt;color = BLACK;
+                New-&amp;gt;color = BLACK;
+                New-&amp;gt;parent-&amp;gt;parent-&amp;gt;color = RED;
+                New = New-&amp;gt;parent-&amp;gt;parent;
+            }
+            else {
+                if (New == New-&amp;gt;parent-&amp;gt;left)
+                {
+                    New = New-&amp;gt;parent;
+                    rotateRight(Root, New);
+                }
+                New-&amp;gt;parent-&amp;gt;color = BLACK;
+                New-&amp;gt;parent-&amp;gt;parent-&amp;gt;color = RED;
+                rotateLeft(Root, New-&amp;gt;parent-&amp;gt;parent);
+            }
+        }
+    }
+    Root[0]-&amp;gt;color = BLACK;
+}
+void redBlackInsert(Node** T, int key)
+{
+    Node* z =  newNode(key);
+    Node* y =  T_Nil;
+    Node* x = *T;
+
+    // Find where to Insert new node Z into the binary search tree
+    while (x != T_Nil) {
+        y = x;
+        if (z-&amp;gt;key &amp;lt; x-&amp;gt;key)
+            x = x-&amp;gt;left;
+        else
+            x = x-&amp;gt;right;
+    }
+
+    z-&amp;gt;parent = y;
+    if (y == T_Nil)
+        *T = z;
+    else if (z-&amp;gt;key &amp;lt; y-&amp;gt;key)
+        y-&amp;gt;left  = z;
+    else
+        y-&amp;gt;right = z;
+
+    // Init z as a red leaf
+    z-&amp;gt;left  = T_Nil;
+    z-&amp;gt;right = T_Nil;
+    z-&amp;gt;color = RED;
+
+    // Ensure the Red-Black property is maintained
+    redBlackInsertFixup(T, z);
+}
+
+#define MAX(a,b) (((a)&amp;gt;(b))?(a):(b))
+
+int height(Node* Root)
+{
+    int h = 0;
+
+    if (Root != NULL) {
+        if (Root == T_Nil)
+            h = 1;
+        else
+        {
+            int leftHeight  = height(Root-&amp;gt;left);
+            int rightHeight = height(Root-&amp;gt;right);
+            h = MAX(leftHeight, rightHeight) + 1;
+        }
+    }
+
+    return h;
+}
+
+//中序遍历
+void printTree(Node* root)
+{
+    if (root-&amp;gt;left != T_Nil)
+        printTree(root-&amp;gt;left);
+    printf(&quot;%d &quot;, root-&amp;gt;key);
+    if (root-&amp;gt;right != T_Nil)
+        printTree(root-&amp;gt;right);
+}
+
+int main(int argc, char* argv[])
+{
+    Node* Root = T_Nil;
+    int list[10] = {1, 3, 2, 5, 4, 7, 6, 9, 8, 10};
+    for (int i = 0; i &amp;lt; 10; i++)
+    {
+        //printf(&quot;%d &quot;, list[i]);
+        redBlackInsert(&amp;amp;Root, list[i]);
+    }
+    printTree(Root);
+}
+
+
+
+分块查找
+
+  分块查找又称索引顺序查找，它是顺序查找的一种改进方法。
+  算法思想：将n个数据元素”按块有序”划分为m块（m ≤ n）。每一块中的结点不必有序，但块与块之间必须”按块有序”；即第1块中任一元素的关键字都必须小于第2块中任一元素的关键字；而第2块中任一元素又都必须小于第3块中的任一元素。
+  性能在顺序查找和二分查找之间:
+  实现代码(这种方法不够自动):
+
+
+#include&amp;lt;iostream&amp;gt;
+using namespace std;
+ 
+#define MAX 16
+ 
+typedef int key_type;
+ 
+struct elem
+{
+  key_type key; //关键字 
+};
+ 
+//索引结构 
+struct index         
+{
+  key_type key; //索引值 
+  long low;     //起始位置 
+  long high;    //终止位置 
+};
+ 
+int index_search(elem e[], key_type key, int n, index idx[], int idx_length)
+{
+  int low = 0;
+  int high = idx_length - 1;
+  int mid;
+  
+  //采用折半查找在索引表里找到关键字所在的块
+  while(low &amp;lt;= high)
+  {
+    mid = (low + high)/2;
+    if(key &amp;lt; idx[mid].key)
+      high = mid - 1;
+    else if(key &amp;gt; idx[mid].key)
+      low = mid + 1;
+         else
+      break;
+  } 
+  
+  //采用顺序查找的方法从块中查找关键值
+  int i = idx[mid].low;
+  
+  while(i &amp;lt;= idx[mid].high &amp;amp;&amp;amp; e[i].key != key)
+  {
+    i++;
+  } 
+  
+  if(i &amp;gt; idx[mid].high)
+    return -1;
+  else
+    return i;
+}
+ 
+ 
+int main(int argc, char** argv)
+{
+  elem linelist[MAX] = {
+    8, 20, 13, 17,
+    40, 42, 45, 32,
+    49, 58, 50, 52,
+    67, 79, 78, 80
+  };
+  
+  int n = sizeof(linelist) / sizeof(elem);
+  key_type key = 50;
+  
+  //建立索引表
+  index index_table[4] = {
+      {20,0,3}, 
+      {45,4,7}, 
+      {58,8,11}, 
+      {80,12,15}}; 
+  int idx_length = sizeof(index_table) / sizeof(index);
+  
+  printf(&quot;线性表中的元素为：\n&quot;);
+ 
+  int i = 0;
+  
+  while(i &amp;lt; n) 
+  {
+    printf(&quot;%d\n&quot;,linelist[i].key);
+    i++;
+  }
+  
+  printf(&quot;\n关键字[%d]在线性表中的位置下标为[%d]&quot;, key, index_search(linelist, key, n, index_table, idx_length));
+  
+  getchar();
+  system(&quot;pause&quot;);
+}
+
+
+
+HASH查找
+
+  通过函数实现KV查找,用空间代替时间
+  HASH构造方法: link
+
 
 </content>
       <categories>

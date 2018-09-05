@@ -1,5 +1,5 @@
 ---
-title:      "查找算法"
+title:      "算法"
 date:       2018-06-28 12:00:00
 categories:
 - 算法
@@ -615,4 +615,37 @@ int main(int argc, char** argv)
 ## HASH查找
 * 通过函数实现KV查找,用空间代替时间
 * HASH构造方法: [link](https://blog.csdn.net/tanggao1314/article/details/51457585)
+
+
+# 其他
+
+## 字符串查找算法
+传统的字符串匹配算法:
+
+~~~c
+void find(char t[],char p[]){
+    int m = strlen(t);
+    int n = strlen(p);
+    int i,j,k;//k:匹配串下标，j：模式串下标
+    for(k=0;k<m;k++){
+        j = 0;
+        i = k;
+        while(j<n){
+            if(p[j]==t[i]){
+                i++;
+                j++;
+            }else{
+                break;
+            }
+        }
+        if(j==n){
+            printf("在%d处匹配\n",k);
+            break;
+        }
+    }
+}
+~~~
+
+*KMP*算法
+* 
 

@@ -1,0 +1,35 @@
+---
+title:      "cmake学习"
+date:       2018-03-30 12:00:00
+header-img: "img/post-bg-2015.jpg"
+catalog: true
+tags:
+    - cmake
+---
+
+"cmake学习"
+
+## 基本结构
+
+~~~
+cmake_minimum_required(VERSION 2.6)
+project(xxx)
+add_executable(xxx main.cpp)
+~~~
+
+* cmake_minimum_required指定cmake的版本
+* project指定项目
+* add_executable指定生成的可运行文件
+* add_subdirectory添加需要编译的源文件的子目录 
+* include_directories向工程添加多个特定的头文件搜索路径
+* link_directories添加非标准的共享库搜索路径  
+* target_link_libraries来为 target 添加需要链接的共享库 
+* set显式的定义变量
+* message于向终端输出用户定义的信息
+
+## install指令
+将编译生成的文件分类安装到制定的目录路径。可分成好几类文件的安装命令
+
+
+## 官网地址
+[link](https://cmake.org/cmake-tutorial/)

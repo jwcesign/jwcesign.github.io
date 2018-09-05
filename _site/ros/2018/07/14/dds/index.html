@@ -434,6 +434,57 @@ DDS规范有两层，分别是数据本地重构层DLRL（Data Local Reconstruct
 Information to the Right Place at the Right Time.”</li>
 </ul>
 
+<h2 id="补充">补充</h2>
+<p>OMG IDL Stubs and Skeletons(IDL stubs and skeletons serve as a “glue” between the client and servants, respectively, and the ORB),IDL Compiler(An IDL compiler transforms OMG IDL definitions into stubs and skeletons),Dynamic Invocation Interface(Dynamic Invocation Interface (DII): The DII allows clients to generate requests at run-time), Dynamic Skeleton Interface(The DSI allows an ORB to deliver requests to servants that have no compile-time knowledge of the IDL interface they implement), Object Adapter(Object Adapters enable ORBs to support various types of servants that possess similar requirements),Interface Repository(The Interface Repository provides run-time information about IDL interfaces),Implementation Repository(The Implementation Repository contains information that allows an ORB to activate servers to process servants).</p>
+
+<p>CORBA适用场景：RPC-style applications that possess “best-effort” quality of service (QoS) requirements.
+CORBA不适用场景： high-performance, real-time applications for the fol- lowing reasons.
+REASON:(1)Lack of QoS specification interfaces;(2)Lack of QoS enforcement;(3)Lack of real-time programming features:(4)Lack of performance optimizations;(5)</p>
+
+<h2 id="文档阅读">文档阅读</h2>
+
+<ol>
+  <li>各膜的全称及作用
+  1.1 AMQP: The Advanced Message Queuing Protocol
+   作用: designed to address applications requiring fast and reliable business transactions.
+  1.2 JMS: Java Message Service API
+   作用:  designed to address applications requiring fast and reliable business transactions, JMS is focused on Java-centric systems<br />
+  1.3 MQTT:  Message Queuing Telemetry Transport 
+   作用: provides a simple and lightweight device data collection solution
+  1.4 REST: Representational state transfer
+   作用:  provides a simple client-server (request/reply) style of communications that is useful for systems that need to communicate over the Internet, but it cannot provide asynchronous loosely coupled publish-and-subscribe message exchanges. 
+ahdjkahsdjhajkshdfjkhajkdfhakhfjkhajskdhfkashkdfhkasdfasd</li>
+</ol>
+
+<h2 id="729任务">7/29任务</h2>
+<p>消息中间件，实时系统，嵌入式，AI算子，</p>
+<h3 id="嵌入式嵌入式">嵌入式,嵌入式</h3>
+<ul>
+  <li>Dr. Basel Halak: <a href="https://www.ecs.soton.ac.uk/people/bh9">link</a>
+    <ul>
+      <li>嵌入式教授</li>
+      <li>关注嵌入式安全和功耗</li>
+    </ul>
+  </li>
+  <li>Professor Bashir Al-Hashimi: <a href="https://www.ecs.soton.ac.uk/people/bmah#publications">link</a>
+    <ul>
+      <li>嵌入式教授，比较牛</li>
+      <li>关注嵌入式系统中的低功耗，如实时系统中的低功耗，关系power-efficient的论文较多</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="real-time比较">Real-time比较</h2>
+<p>TAO为满足QoS所做的操作：</p>
+<ol>
+  <li>高速网路适配器：一个或多个ATM接口控制器芯片(APIC)互相连接而组成的菊花链 .APIC能作为一个系统/网络接口使用，也能作为I/O接口芯片组使用.</li>
+  <li>实时I/O系统：通过避免优先级倒置来提高实时性，用一个核心线程池专用处理协议并且用应用程序的线程关联这些线程. 这些核心线程运行在与应用程序线程同样的优先级别, 这样能防止多种实时调度事故的发生如优先反演和隐藏调度.</li>
+  <li>实时调度:TAO通过支持周期性实时应用程序的实时I/O调度类来确保支持QoS. 一旦实时I/O类的一个线程被操作系统接纳, 调度程序将负责(1) 计算在类中相关的其它线程的优先级并且(2)周期性地分发这些线程以使它们在最后期限是满足的.</li>
+  <li>输入控制器:输入控制允许操作系统要么确保指定的计算时间，要么拒绝接收线程. 输入控制对于实时系统在确定和统计QoS需求方面很有用处.</li>
+  <li>实时对象适配器:TAO使用de-分层多路分解 (Figure 4(B)).这种近似使用多路分解键(demultiplexing keys)的方式把ORB指派给客户端. 这些键映射客户请求到对象/操作在O(1)时间里不需要任何的哈西运算或搜索.
+<a href="http://docs.huihoo.com/ace_tao/i/corba_demux2.gif">img</a></li>
+</ol>
+
 
 
       
@@ -646,7 +697,7 @@ Information to the Right Place at the Right Time.”</li>
             
               <div class="post-toc-content">
     <ol class=nav>
-      <li class="nav-item nav-level-1"> <a class="nav-link" href="#dds学习"> <span class="nav-number">1</span> <span class="nav-text">DDS学习</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-2"> <a class="nav-link" href="#概念"> <span class="nav-number">1.1</span> <span class="nav-text">概念</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#dds架构"> <span class="nav-number">1.2</span> <span class="nav-text">DDS架构</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#dds域domain和域参与者domain-participant"> <span class="nav-number">1.3</span> <span class="nav-text">DDS域（Domain）和域参与者（Domain Participant）</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#dds组成模型"> <span class="nav-number">1.4</span> <span class="nav-text">DDS组成模型</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#几个重要概念"> <span class="nav-number">1.5</span> <span class="nav-text">几个重要概念</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#dds官方文档阅读"> <span class="nav-number">1.6</span> <span class="nav-text">DDS官方文档阅读</span> </a> </li> </ol> </li>
+      <li class="nav-item nav-level-1"> <a class="nav-link" href="#dds学习"> <span class="nav-number">1</span> <span class="nav-text">DDS学习</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-2"> <a class="nav-link" href="#概念"> <span class="nav-number">1.1</span> <span class="nav-text">概念</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#dds架构"> <span class="nav-number">1.2</span> <span class="nav-text">DDS架构</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#dds域domain和域参与者domain-participant"> <span class="nav-number">1.3</span> <span class="nav-text">DDS域（Domain）和域参与者（Domain Participant）</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#dds组成模型"> <span class="nav-number">1.4</span> <span class="nav-text">DDS组成模型</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#几个重要概念"> <span class="nav-number">1.5</span> <span class="nav-text">几个重要概念</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#dds官方文档阅读"> <span class="nav-number">1.6</span> <span class="nav-text">DDS官方文档阅读</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#补充"> <span class="nav-number">1.7</span> <span class="nav-text">补充</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#文档阅读"> <span class="nav-number">1.8</span> <span class="nav-text">文档阅读</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#729任务"> <span class="nav-number">1.9</span> <span class="nav-text">7/29任务</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-3"> <a class="nav-link" href="#嵌入式嵌入式"> <span class="nav-number">1.9.1</span> <span class="nav-text">嵌入式,嵌入式</span> </a> </li> </ol> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#real-time比较"> <span class="nav-number">1.10</span> <span class="nav-text">Real-time比较</span> </a> </li> </ol> </li>
     </ol>
   </div>
             
