@@ -616,6 +616,192 @@ int main(int argc, char** argv)
 * 通过函数实现KV查找,用空间代替时间
 * HASH构造方法: [link](https://blog.csdn.net/tanggao1314/article/details/51457585)
 
+# 动态规划
+## 含义
+* 动态规划算法的核心就是记住已经解决过的子问题的解。
+* 两种方法: ①自顶向下的备忘录法 ②自底向上。
+* [讲解](https://blog.csdn.net/u013309870/article/details/75193592)
+
+## 自顶向下的备忘录法
+~~~c
+#include <iostream>
+using namespace std;
+
+
+int fib(int n,int *Memo)
+{
+    if(Memo[n]!=-1)
+        return Memo[n];
+    //如果已经求出了fib（n）的值直接返回，否则将求出的值保存在Memo备忘录中。               
+    if(n<=2)
+        Memo[n]=1;
+    else 
+        Memo[n]=fib( n-1,Memo)+fib(n-2,Memo);  
+    return Memo[n];
+}
+int Fibonacci(int n)
+{
+    if(n<=0)
+        return n;
+    int *Memo=new int(n+1);        
+    for(int i=0;i<=n;i++)
+         Memo[i]=-1;
+    return fib(n, Memo);
+}
+
+int main(){
+    cout << Fibonacci(6) << endl;
+    return 0;
+}
+~~~
+备忘录法也是比较好理解的，创建了一个n+1大小的数组来保存求出的斐波拉契数列中的每一个值，在递归的时候如果发现前面fib（n）的值计算出来了就不再计算，如果未计算出来，则计算出来后保存在Memo数组中，下次在调用fib（n）的时候就不会重新递归了。比如上面的递归树中在计算fib（6）的时候先计算fib（5），调用fib（5）算出了fib（4）后，fib（6）再调用fib（4）就不会在递归fib（4）的子树了，因为fib（4）的值已经保存在Memo[4]中。
+
+## 自底向上
+~~~c
+public static int fib(int n)
+{
+  if(n<=1)
+    return n;
+
+  int Memo_i_2=0;
+  int Memo_i_1=1;
+  int Memo_i=1;
+  for(int i=2;i<=n;i++)
+  {
+    Memo_i=Memo_i_2+Memo_i_1;
+    Memo_i_2=Memo_i_1;
+    Memo_i_1=Memo_i;
+  }       
+  return Memo_i;
+}
+~~~
+一般来说由于备忘录方式的动态规划方法使用了递归，递归的时候会产生额外的开销，使用自底向上的动态规划方法要比备忘录方法好。 
+
+## 例题
+### 钢条切割
+* 递归
+
+~~~c
+#include <iostream>
+using namespace std;
+
+int cut(int *p, int n)
+{
+    if (n==0)
+        return 0;
+    int q=-10;
+    int m;
+    for (int i=1;i<=n;++i)
+    {
+        m = cut(p,n-i);
+        if (q<(p[i-1]+m))
+            q = p[i-1]+m;
+    }
+    return q;
+}
+
+int main()
+{
+    int p[]={1,5,8,9,10,17,17,20,24,30};
+    cout << cut(p, 9);
+}
+~~~
+把每个子最优解返回到父最优解
+
+* 备忘
+
+~~~c
+#include <iostream>
+using namespace std;
+
+int cut(int *r, int *p, int n)
+{
+    int q = -1;
+    int m;
+    if (n==0)
+        return 0;
+    if (r[n-1] != -1)
+        return r[n-1];
+    for (int i=1;i<=n;i++)
+    {
+        m = p[i-1]+cut(r,p,n-i);
+        if (m>q)
+            q = m;
+    }
+    r[n-1] = q;
+    return q;
+}
+
+int cut_pre(int *p, int n)
+{
+    int *r = new int(n);
+    for (int i=0;i<n;i++)
+        r[i] = -1;
+    return cut(r, p, n);
+}
+
+int main()
+{
+    // 每长度对应的价值
+    int p[]={1,5,8,9,10,17,17,20,24,30};
+    // 9为长度
+    cout << cut_pre(p, 9);
+}
+~~~
+
+* 自底向上
+
+~~~c
+#include <iostream>
+using namespace std;
+
+int cut(int *p, int n)
+{
+    int *r = new int(n+1);
+    int q, m;
+    for (int i=0;i<n+1;i++)
+    {
+        r[i] = 0;
+    }
+    for (int i=1;i<=n;i++)
+    {
+        q = -1;
+        for (int j=1;j<=i;j++)
+        {
+            m = p[j-1]+r[i-j];
+            if (m>q)
+                q = m;
+        }
+        r[i] = q;
+    }
+    return r[n];
+}
+
+int main()
+{
+    // 每长度对应的价值
+    int p[]={1,5,8,9,10,17,17,20,24,30};
+    // 9为长度
+    cout << cut(p, 9);
+}
+~~~
+通过求解最优子问题来解决副问题的最优解
+
+## 在什么地方用？
+### 最优子结构
+用动态规划求解最优化问题的第一步就是刻画最优解的结构，如果一个问题的解结构包含其子问题的最优解，就称此问题具有最优子结构性质。因此，某个问题是否适合应用动态规划算法，它是否具有最优子结构性质是一个很好的线索。使用动态规划算法时，用子问题的最优解来构造原问题的最优解。因此必须考查最优解中用到的所有子问题。
+
+### 重叠子问题
+在斐波拉契数列和钢条切割结构图中，可以看到大量的重叠子问题，比如说在求fib（6）的时候，fib（2）被调用了5次，在求cut（4）的时候cut（0）被调用了4次。如果使用递归算法的时候会反复的求解相同的子问题，不停的调用函数，而不是生成新的子问题。如果递归算法反复求解相同的子问题，就称为具有重叠子问题（overlapping subproblems）性质。在动态规划算法中使用数组来保存子问题的解，这样子问题多次求解的时候可以直接查表不用调用函数递归。
+
+## 动态规划的经典模型
+
+### 线性模型
+线性模型的是动态规划中最常用的模型，上文讲到的钢条切割问题就是经典的线性模型，这里的线性指的是状态的排布是呈线性的。
+
+例：在一个夜黑风高的晚上，有n（n <= 50）个小朋友在桥的这边，现在他们需要过桥，但是由于桥很窄，每次只允许不大于两人通过，他们只有一个手电筒，所以每次过桥的两个人需要把手电筒带回来，i号小朋友过桥的时间为T[i]，两个人过桥的总时间为二者中时间长者。问所有小朋友过桥的总时间最短是多少。
+
+
 
 # 其他
 

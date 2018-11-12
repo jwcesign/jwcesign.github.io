@@ -83,7 +83,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Jekyll, NexT" />
+  <meta name="keywords" content="cmake," />
 
 
 
@@ -111,17 +111,17 @@
 
 
 
-<meta name="description" content="Building...">
-<meta name="keywords" content="Jekyll, NexT">
-<meta property="og:type" content="website">
-<meta property="og:title" content="NexT">
-<meta property="og:url" content="http://localhost:4000/about/">
+<meta name="description" content="“cmake学习”">
+<meta name="keywords" content="cmake">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cmake学习">
+<meta property="og:url" content="http://localhost:4000/2018/03/30/makefile/">
 <meta property="og:site_name" content="NexT">
-<meta property="og:description" content="Building...">
+<meta property="og:description" content="“cmake学习”">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NexT">
-<meta name="twitter:description" content="Building...">
+<meta name="twitter:title" content="cmake学习">
+<meta name="twitter:description" content="“cmake学习”">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -154,7 +154,7 @@
 
 
 
-  <title>              About | NexT      </title>
+  <title>cmake学习 | NexT</title>
   
 
 
@@ -268,24 +268,208 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
+
 <div id="posts" class="posts-expand">
-<header class="post-header">
+  
+  
 
-	<h1 class="post-title" itemprop="name headline">
+  
+
+  
+  
+  
+
+  <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/2018/03/30/makefile/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CESIGN">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="assets/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NexT">
+    </span>
+
     
-      About
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+          
+          
+            cmake学习
+          
+        </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-30T20:00:00+08:00">
+                2018-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+            
+                <div class="post-description">
+                    
+                </div>
+            
+          
+
+        </div>
+      </header>
     
-  </h1>
 
+    <div class="post-body" itemprop="articleBody">
 
+      
+      
 
-</header>
-
+      
+        
   
   
-    <p>Building…</p>
 
-  
+
+
+
+
+
+
+
+
+
+
+
+  <p>“cmake学习”</p>
+
+<h2 id="基本结构">基本结构</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3</pre></td><td class="code"><pre class="highlight"><code>cmake_minimum_required(VERSION 2.6)
+project(xxx)
+add_executable(xxx main.cpp)
+</code></pre></td></tr></tbody></table></div>
+</div>
+
+<ul>
+  <li>cmake_minimum_required指定cmake的版本</li>
+  <li>project指定项目</li>
+  <li>add_executable指定生成的可运行文件</li>
+  <li>add_subdirectory添加需要编译的源文件的子目录</li>
+  <li>include_directories向工程添加多个特定的头文件搜索路径</li>
+  <li>link_directories添加非标准的共享库搜索路径</li>
+  <li>target_link_libraries来为 target 添加需要链接的共享库</li>
+  <li>set显式的定义变量</li>
+  <li>message于向终端输出用户定义的信息</li>
+</ul>
+
+<h2 id="install指令">install指令</h2>
+<p>将编译生成的文件分类安装到制定的目录路径。可分成好几类文件的安装命令</p>
+
+<h2 id="官网地址">官网地址</h2>
+<p><a href="https://cmake.org/cmake-tutorial/">link</a></p>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            
+            <a href="/tag/#/cmake" rel="tag"># cmake</a>
+          
+        </div>
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+        <div class="post-nav" id="post-nav-id">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/k8s/2018/06/06/k8s/" rel="next" title="k8s架构">
+                <i class="fa fa-chevron-left"></i> k8s架构
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/30/docker_learn/" rel="prev" title="Docker入门">
+                Docker入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+      
+
+      
+    </footer>
+  </article>
+
+  <div class="post-spread">
+    
+  </div>
 </div>
 
 
@@ -294,6 +478,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -311,10 +499,30 @@
     <div class="sidebar-inner">
 
       
+        
+        
+        
+
+
+
+
+
+
 
       
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/assets/images/avatar.gif"
@@ -385,6 +593,34 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+
+
+
+
+
+
+
+            
+              <div class="post-toc-content">
+    <ol class=nav>
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#基本结构"> <span class="nav-number">1</span> <span class="nav-text">基本结构</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#install指令"> <span class="nav-number">2</span> <span class="nav-text">install指令</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#官网地址"> <span class="nav-number">3</span> <span class="nav-text">官网地址</span> </a> </li>
+    </ol>
+  </div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

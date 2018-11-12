@@ -2,6 +2,20 @@
 <search>
   
     <entry>
+      <title>C++编程规范</title>
+      <url>/2018/08/19/c++%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/</url>
+      <content type="text">
+</content>
+      <categories>
+        
+      </categories>
+      <tags>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
       <title>DDS学习</title>
       <url>/ros/2018/07/14/dds/</url>
       <content type="text">DDS学习
@@ -105,7 +119,7 @@ img
     </entry>
   
     <entry>
-      <title>查找算法</title>
+      <title>算法</title>
       <url>/%E7%AE%97%E6%B3%95/2018/06/28/alg/</url>
       <content type="text">查找算法
 
@@ -310,199 +324,112 @@ int main()
   代码实现：
 
 
-#include&amp;lt;stdio.h&amp;gt;
-#include&amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
 
-#define RED   'R'
-#define BLACK 'B'
+#define SIZE 10
+
+typedef struct binary_node{
+  int value;
+  struct binary_node* left;
+  struct binary_node* right;
+}bin_node;
 
 
-typedef struct Node {
-    int          key;
-    char         color;
-    struct Node *left;
-    struct Node *right;
-    struct Node *parent;
-} Node;
-
-// Based on CLRS algorithm, use T_Nil as a sentinel to simplify code
-struct Node  T_Nil_Node;
-Node* T_Nil = &amp;amp;T_Nil_Node;
-
-Node* Root = NULL;
-
-// A utility function to create a new BST node
-Node* newNode(int key)
+void insert_node(bin_node* root,bin_node* child)
 {
-    Node *temp   = (Node*) malloc(sizeof(Node));
-    temp-&amp;gt;key    = key;
-    temp-&amp;gt;color  = RED;
-    temp-&amp;gt;left   = NULL;
-    temp-&amp;gt;right  = NULL;
-    temp-&amp;gt;parent = NULL;
-
-    return temp;
+  if (child-&amp;gt;value &amp;gt;= root-&amp;gt;value &amp;amp;&amp;amp; root-&amp;gt;right != NULL)
+  {
+    insert_node(root-&amp;gt;right,child);
+  }
+  if (child-&amp;gt;value &amp;lt; root-&amp;gt;value &amp;amp;&amp;amp; root-&amp;gt;left != NULL)
+  {
+    insert_node(root-&amp;gt;left,child);
+  }
+  if (child-&amp;gt;value &amp;gt;= root-&amp;gt;value &amp;amp;&amp;amp; root-&amp;gt;right == NULL)
+  {
+    root-&amp;gt;right = child;
+  }
+  if (child-&amp;gt;value &amp;lt; root-&amp;gt;value &amp;amp;&amp;amp; root-&amp;gt;left == NULL)
+  {
+    root-&amp;gt;left = child;
+  }
 }
 
-void rotateLeft( Node** T, Node* x)
+void create_tree(bin_node** root, int array[], int size)
 {
-    Node *y  = x-&amp;gt;right;    // set y
-    x-&amp;gt;right = y-&amp;gt;left;     // turn y's left subtree into x's right subtree{
-    if (y-&amp;gt;left != T_Nil)
-        y-&amp;gt;left-&amp;gt;parent = x;
-    y-&amp;gt;parent = x-&amp;gt;parent;  // link x's parent to y
-    if (x-&amp;gt;parent == T_Nil)
-        *T = y;
-    else if (x == x-&amp;gt;parent-&amp;gt;left)
-        x-&amp;gt;parent-&amp;gt;left = y;
-    else
-        x-&amp;gt;parent-&amp;gt;right = y;
-    y-&amp;gt;left   = x;            // put x on y's left
-    x-&amp;gt;parent = y;
+  int i;
+  *root = (bin_node*)malloc(sizeof(bin_node)); 
+  (*root)-&amp;gt;value = array[0];
+  (*root)-&amp;gt;left = NULL;
+  (*root)-&amp;gt;right = NULL;
+  for (i=1; i&amp;lt;size;i++)
+  {
+    bin_node* child = (bin_node*)malloc(sizeof(bin_node));
+    child-&amp;gt;value = array[i];
+    child-&amp;gt;left = NULL;
+    child-&amp;gt;right = NULL;
+    insert_node(*root,child);
+  }
 }
 
-void rotateRight(Node** T, Node* y)
+void dis_node(bin_node* node)
 {
-    Node *x  = y-&amp;gt;left;     // set x
-    y-&amp;gt;left  = x-&amp;gt;right;    // turn x's right subtree into y's left subtree{
-    if (x-&amp;gt;right != T_Nil)
-        x-&amp;gt;right-&amp;gt;parent = y;
-    x-&amp;gt;parent = y-&amp;gt;parent;  // link y's parent to x
-    if (y-&amp;gt;parent == T_Nil)
-        *T = x;
-    else if (y == y-&amp;gt;parent-&amp;gt;right)
-        y-&amp;gt;parent-&amp;gt;right = x;
-    else
-        y-&amp;gt;parent-&amp;gt;left  = x;
-    x-&amp;gt;right  = y;         // put y on x's right
-    y-&amp;gt;parent = x;
+  if (node == NULL)
+    return;
+  if (node-&amp;gt;left != NULL)
+  {
+    dis_node(node-&amp;gt;left);
+  }
+  printf(&quot;%d &quot;,node-&amp;gt;value);
+  if (node-&amp;gt;right != NULL)
+  {
+    dis_node(node-&amp;gt;right);
+  }
 }
 
-void redBlackInsertFixup(Node** Root, Node* New)
+bin_node* search_node(bin_node* node, int value)
 {
-    Node* temp;
-    while (New-&amp;gt;parent-&amp;gt;color == RED)
-    {
-        if (New-&amp;gt;parent == New-&amp;gt;parent-&amp;gt;parent-&amp;gt;left)
-        {
-            temp = New-&amp;gt;parent-&amp;gt;parent-&amp;gt;right;
-            if (temp-&amp;gt;color == RED)
-            {
-                New-&amp;gt;parent-&amp;gt;color = BLACK;
-                temp-&amp;gt;color = BLACK;
-                New-&amp;gt;parent-&amp;gt;parent-&amp;gt;color = RED;
-                New = New-&amp;gt;parent-&amp;gt;parent;
-            }
-            else {
-                if (New == New-&amp;gt;parent-&amp;gt;right)
-                {
-                    New = New-&amp;gt;parent;
-                    rotateLeft(Root, New);
-                }
-                New-&amp;gt;parent-&amp;gt;color = BLACK;
-                New-&amp;gt;parent-&amp;gt;parent-&amp;gt;color = RED;
-                rotateRight(Root, New-&amp;gt;parent-&amp;gt;parent);
-            }
-        }
-        else
-        {
-            temp = New-&amp;gt;parent-&amp;gt;parent-&amp;gt;left;
-            if (temp-&amp;gt;color == RED)
-            {
-                New-&amp;gt;parent-&amp;gt;color = BLACK;
-                New-&amp;gt;color = BLACK;
-                New-&amp;gt;parent-&amp;gt;parent-&amp;gt;color = RED;
-                New = New-&amp;gt;parent-&amp;gt;parent;
-            }
-            else {
-                if (New == New-&amp;gt;parent-&amp;gt;left)
-                {
-                    New = New-&amp;gt;parent;
-                    rotateRight(Root, New);
-                }
-                New-&amp;gt;parent-&amp;gt;color = BLACK;
-                New-&amp;gt;parent-&amp;gt;parent-&amp;gt;color = RED;
-                rotateLeft(Root, New-&amp;gt;parent-&amp;gt;parent);
-            }
-        }
-    }
-    Root[0]-&amp;gt;color = BLACK;
-}
-void redBlackInsert(Node** T, int key)
-{
-    Node* z =  newNode(key);
-    Node* y =  T_Nil;
-    Node* x = *T;
-
-    // Find where to Insert new node Z into the binary search tree
-    while (x != T_Nil) {
-        y = x;
-        if (z-&amp;gt;key &amp;lt; x-&amp;gt;key)
-            x = x-&amp;gt;left;
-        else
-            x = x-&amp;gt;right;
-    }
-
-    z-&amp;gt;parent = y;
-    if (y == T_Nil)
-        *T = z;
-    else if (z-&amp;gt;key &amp;lt; y-&amp;gt;key)
-        y-&amp;gt;left  = z;
-    else
-        y-&amp;gt;right = z;
-
-    // Init z as a red leaf
-    z-&amp;gt;left  = T_Nil;
-    z-&amp;gt;right = T_Nil;
-    z-&amp;gt;color = RED;
-
-    // Ensure the Red-Black property is maintained
-    redBlackInsertFixup(T, z);
+  if (node == NULL)
+  {
+    return NULL;
+  }
+  if (value == node-&amp;gt;value)
+  {
+    return node;
+  }
+  if (value &amp;gt; node-&amp;gt;value)
+  {
+    return search_node(node-&amp;gt;right,value);
+  }
+  if (value &amp;lt; node-&amp;gt;value)
+  {
+    return search_node(node-&amp;gt;left,value);
+  }
+  return NULL;
 }
 
-//中序遍历
-void printTree(Node* root)
-{
-    if (root-&amp;gt;left != T_Nil)
-        printTree(root-&amp;gt;left);
-    printf(&quot;%d &quot;, root-&amp;gt;key);
-    if (root-&amp;gt;right != T_Nil)
-        printTree(root-&amp;gt;right);
-}
 
-void findNode(Node* root,int key)
+int main()
 {
-    if (root-&amp;gt;key == key)
-    {
-        printf(&quot;\nYes\n&quot;);
-        return;
-    }
-    else
-    {
-        if (root-&amp;gt;key &amp;gt; key)
-            if (root-&amp;gt;left != T_Nil)
-                findNode(root-&amp;gt;left,key);
-            else
-                return;
-        else
-            if (root-&amp;gt;right != T_Nil)
-                findNode(root-&amp;gt;right,key);
-            else
-                return;
-    }
-}
-
-int main(int argc, char* argv[])
-{
-    Node* Root = T_Nil;
-    int list[10] = {1, 3, 2, 5, 4, 7, 6, 9, 8, 10};
-    for (int i = 0; i &amp;lt; 10; i++)
-    {
-        //printf(&quot;%d &quot;, list[i]);
-        redBlackInsert(&amp;amp;Root, list[i]);
-    }
-    printTree(Root);
-    findNode(Root,8);
+  int array[SIZE] = {4,1,45,78,345,23,12,3,6,21};
+  bin_node* root = NULL;
+  bin_node* search_result = NULL;
+  int search_value;
+  create_tree(&amp;amp;root,array,SIZE);
+  dis_node(root);
+  printf(&quot;\nPlease input value to search:&quot;);
+  scanf(&quot;%d&quot;,&amp;amp;search_value);
+  search_result = search_node(root,search_value);
+  if (search_result != NULL)
+  {
+    printf(&quot;Yes\n&quot;)&amp;amp;;
+  }
+  else
+  {
+    printf(&quot;No\n&quot;);
+  }
+  return 0;
 }
 
 
@@ -821,6 +748,272 @@ HASH查找
   HASH构造方法: link
 
 
+动态规划
+含义
+
+  动态规划算法的核心就是记住已经解决过的子问题的解。
+  两种方法: ①自顶向下的备忘录法 ②自底向上。
+  讲解
+
+
+自顶向下的备忘录法
+#include &amp;lt;iostream&amp;gt;
+using namespace std;
+
+
+int fib(int n,int *Memo)
+{
+    if(Memo[n]!=-1)
+        return Memo[n];
+    //如果已经求出了fib（n）的值直接返回，否则将求出的值保存在Memo备忘录中。               
+    if(n&amp;lt;=2)
+        Memo[n]=1;
+    else 
+        Memo[n]=fib( n-1,Memo)+fib(n-2,Memo);  
+    return Memo[n];
+}
+int Fibonacci(int n)
+{
+    if(n&amp;lt;=0)
+        return n;
+    int *Memo=new int(n+1);        
+    for(int i=0;i&amp;lt;=n;i++)
+         Memo[i]=-1;
+    return fib(n, Memo);
+}
+
+int main(){
+    cout &amp;lt;&amp;lt; Fibonacci(6) &amp;lt;&amp;lt; endl;
+    return 0;
+}
+
+
+备忘录法也是比较好理解的，创建了一个n+1大小的数组来保存求出的斐波拉契数列中的每一个值，在递归的时候如果发现前面fib（n）的值计算出来了就不再计算，如果未计算出来，则计算出来后保存在Memo数组中，下次在调用fib（n）的时候就不会重新递归了。比如上面的递归树中在计算fib（6）的时候先计算fib（5），调用fib（5）算出了fib（4）后，fib（6）再调用fib（4）就不会在递归fib（4）的子树了，因为fib（4）的值已经保存在Memo[4]中。
+
+自底向上
+public static int fib(int n)
+{
+  if(n&amp;lt;=1)
+    return n;
+
+  int Memo_i_2=0;
+  int Memo_i_1=1;
+  int Memo_i=1;
+  for(int i=2;i&amp;lt;=n;i++)
+  {
+    Memo_i=Memo_i_2+Memo_i_1;
+    Memo_i_2=Memo_i_1;
+    Memo_i_1=Memo_i;
+  }       
+  return Memo_i;
+}
+
+
+一般来说由于备忘录方式的动态规划方法使用了递归，递归的时候会产生额外的开销，使用自底向上的动态规划方法要比备忘录方法好。
+
+例题
+钢条切割
+
+  递归
+
+
+#include &amp;lt;iostream&amp;gt;
+using namespace std;
+
+int cut(int *p, int n)
+{
+    if (n==0)
+        return 0;
+    int q=-10;
+    int m;
+    for (int i=1;i&amp;lt;=n;++i)
+    {
+        m = cut(p,n-i);
+        if (q&amp;lt;(p[i-1]+m))
+            q = p[i-1]+m;
+    }
+    return q;
+}
+
+int main()
+{
+    int p[]={1,5,8,9,10,17,17,20,24,30};
+    cout &amp;lt;&amp;lt; cut(p, 9);
+}
+
+
+把每个子最优解返回到父最优解
+
+
+  备忘
+
+
+#include &amp;lt;iostream&amp;gt;
+using namespace std;
+
+int cut(int *r, int *p, int n)
+{
+    int q = -1;
+    int m;
+    if (n==0)
+        return 0;
+    if (r[n-1] != -1)
+        return r[n-1];
+    for (int i=1;i&amp;lt;=n;i++)
+    {
+        m = p[i-1]+cut(r,p,n-i);
+        if (m&amp;gt;q)
+            q = m;
+    }
+    r[n-1] = q;
+    return q;
+}
+
+int cut_pre(int *p, int n)
+{
+    int *r = new int(n);
+    for (int i=0;i&amp;lt;n;i++)
+        r[i] = -1;
+    return cut(r, p, n);
+}
+
+int main()
+{
+    // 每长度对应的价值
+    int p[]={1,5,8,9,10,17,17,20,24,30};
+    // 9为长度
+    cout &amp;lt;&amp;lt; cut_pre(p, 9);
+}
+
+
+
+
+  自底向上
+
+
+#include &amp;lt;iostream&amp;gt;
+using namespace std;
+
+int cut(int *p, int n)
+{
+    int *r = new int(n+1);
+    int q, m;
+    for (int i=0;i&amp;lt;n+1;i++)
+    {
+        r[i] = 0;
+    }
+    for (int i=1;i&amp;lt;=n;i++)
+    {
+        q = -1;
+        for (int j=1;j&amp;lt;=i;j++)
+        {
+            m = p[j-1]+r[i-j];
+            if (m&amp;gt;q)
+                q = m;
+        }
+        r[i] = q;
+    }
+    return r[n];
+}
+
+int main()
+{
+    // 每长度对应的价值
+    int p[]={1,5,8,9,10,17,17,20,24,30};
+    // 9为长度
+    cout &amp;lt;&amp;lt; cut(p, 9);
+}
+
+
+通过求解最优子问题来解决副问题的最优解
+
+在什么地方用？
+最优子结构
+用动态规划求解最优化问题的第一步就是刻画最优解的结构，如果一个问题的解结构包含其子问题的最优解，就称此问题具有最优子结构性质。因此，某个问题是否适合应用动态规划算法，它是否具有最优子结构性质是一个很好的线索。使用动态规划算法时，用子问题的最优解来构造原问题的最优解。因此必须考查最优解中用到的所有子问题。
+
+重叠子问题
+在斐波拉契数列和钢条切割结构图中，可以看到大量的重叠子问题，比如说在求fib（6）的时候，fib（2）被调用了5次，在求cut（4）的时候cut（0）被调用了4次。如果使用递归算法的时候会反复的求解相同的子问题，不停的调用函数，而不是生成新的子问题。如果递归算法反复求解相同的子问题，就称为具有重叠子问题（overlapping subproblems）性质。在动态规划算法中使用数组来保存子问题的解，这样子问题多次求解的时候可以直接查表不用调用函数递归。
+
+动态规划的经典模型
+
+线性模型
+线性模型的是动态规划中最常用的模型，上文讲到的钢条切割问题就是经典的线性模型，这里的线性指的是状态的排布是呈线性的。
+
+例：在一个夜黑风高的晚上，有n（n &amp;lt;= 50）个小朋友在桥的这边，现在他们需要过桥，但是由于桥很窄，每次只允许不大于两人通过，他们只有一个手电筒，所以每次过桥的两个人需要把手电筒带回来，i号小朋友过桥的时间为T[i]，两个人过桥的总时间为二者中时间长者。问所有小朋友过桥的总时间最短是多少。
+
+其他
+
+字符串查找算法
+传统的字符串匹配算法:
+
+void find(char t[],char p[]){
+    int m = strlen(t);
+    int n = strlen(p);
+    int i,j,k;//k:匹配串下标，j：模式串下标
+    for(k=0;k&amp;lt;m;k++){
+        j = 0;
+        i = k;
+        while(j&amp;lt;n){
+            if(p[j]==t[i]){
+                i++;
+                j++;
+            }else{
+                break;
+            }
+        }
+        if(j==n){
+            printf(&quot;在%d处匹配\n&quot;,k);
+            break;
+        }
+    }
+}
+
+
+
+KMP算法
+
+  详解
+
+
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;string.h&amp;gt;
+#include&amp;lt;vector&amp;gt;
+using namespace std;
+
+int kmp(const string &amp;amp;T, const string &amp;amp;P) {
+  if (P.empty()) return 0;
+
+  vector&amp;lt;int&amp;gt; pi(P.size(), 0);
+  cout &amp;lt;&amp;lt; &quot;---&quot; &amp;lt;&amp;lt; pi.size() &amp;lt;&amp;lt; &quot;---&quot; &amp;lt;&amp;lt; endl;
+  for (int i = 1, k = 0; i &amp;lt; P.size(); ++i) {
+    while (k &amp;amp;&amp;amp; P[k] != P[i]) k = pi[k - 1];
+    if (P[k] == P[i]) ++k;
+    pi[i] = k;
+  }
+  for (int i=0;i&amp;lt;pi.size();i++)
+    cout &amp;lt;&amp;lt; pi[i];
+  cout &amp;lt;&amp;lt; endl;
+
+
+  for (int i = 0, k = 0; i &amp;lt; T.size(); ++i) {
+    while (k &amp;amp;&amp;amp; P[k] != T[i]) k = pi[k - 1];
+    if (P[k] == T[i]) ++k;
+    if (k == P.size()) return i - k + 1;
+  }
+
+  return -1;
+}
+
+
+int main()
+{
+  string T = &quot;abcdefgadbcabcd&quot;;
+  string P = &quot;ccadaddd&quot;;
+  cout &amp;lt;&amp;lt; kmp(T, P);
+  return 0;
+}
+
+
 </content>
       <categories>
         
@@ -1055,6 +1248,48 @@ ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local
       <tags>
         
           <tag> 学习 </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title>cmake学习</title>
+      <url>/2018/03/30/makefile/</url>
+      <content type="text">“cmake学习”
+
+基本结构
+
+cmake_minimum_required(VERSION 2.6)
+project(xxx)
+add_executable(xxx main.cpp)
+
+
+
+
+  cmake_minimum_required指定cmake的版本
+  project指定项目
+  add_executable指定生成的可运行文件
+  add_subdirectory添加需要编译的源文件的子目录
+  include_directories向工程添加多个特定的头文件搜索路径
+  link_directories添加非标准的共享库搜索路径
+  target_link_libraries来为 target 添加需要链接的共享库
+  set显式的定义变量
+  message于向终端输出用户定义的信息
+
+
+install指令
+将编译生成的文件分类安装到制定的目录路径。可分成好几类文件的安装命令
+
+官网地址
+link
+</content>
+      <categories>
+        
+      </categories>
+      <tags>
+        
+          <tag> cmake </tag>
         
       </tags>
       <tags></tags>
