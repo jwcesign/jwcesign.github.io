@@ -620,7 +620,7 @@ int main(int argc, char** argv)
 # 其他
 
 ## 字符串查找算法
-传统的字符串匹配算法:
+### 传统的字符串匹配算法:
 
 ~~~c
 void find(char t[],char p[]){
@@ -646,6 +646,45 @@ void find(char t[],char p[]){
 }
 ~~~
 
-*KMP*算法
-* 
+### *KMP*算法
+  * [详解](http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html)
 
+~~~c
+#include<iostream>
+#include<string.h>
+#include<vector>
+using namespace std;
+
+int kmp(const string &T, const string &P) {
+  if (P.empty()) return 0;
+
+  vector<int> pi(P.size(), 0);
+  cout << "---" << pi.size() << "---" << endl;
+  for (int i = 1, k = 0; i < P.size(); ++i) {
+    while (k && P[k] != P[i]) k = pi[k - 1];
+    if (P[k] == P[i]) ++k;
+    pi[i] = k;
+  }
+  for (int i=0;i<pi.size();i++)
+    cout << pi[i];
+  cout << endl;
+
+
+  for (int i = 0, k = 0; i < T.size(); ++i) {
+    while (k && P[k] != T[i]) k = pi[k - 1];
+    if (P[k] == T[i]) ++k;
+    if (k == P.size()) return i - k + 1;
+  }
+
+  return -1;
+}
+
+
+int main()
+{
+  string T = "abcdefgadbcabcd";
+  string P = "ccadaddd";
+  cout << kmp(T, P);
+  return 0;
+}
+~~~
