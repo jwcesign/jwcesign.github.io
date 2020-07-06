@@ -1,4 +1,4 @@
----
+ ---
 title:      "cmake学习"
 date:       2018-03-30 12:00:00
 header-img: "img/post-bg-2015.jpg"
@@ -29,7 +29,6 @@ add_executable(xxx main.cpp)
 
 ## install指令
 将编译生成的文件分类安装到制定的目录路径。可分成好几类文件的安装命令
-
 
 ## 官网地址
 [link](https://cmake.org/cmake-tutorial/)
