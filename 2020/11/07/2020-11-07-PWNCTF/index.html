@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="“PWN CTF练习”  练习网站PWNABLE 入门级别fd 背景知识学习：什么是FD, file descriptor 题目如下：123456Mommy! what is a file descriptor in Linux?* try to play the wargame your self but if you are ABSOLUTE beginner, follow this tu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PWN CTF练习">
+<meta property="og:url" content="http://example.com/2020/11/07/2020-11-07-PWNCTF/index.html">
+<meta property="og:site_name" content="JWCESIGN">
+<meta property="og:description" content="“PWN CTF练习”  练习网站PWNABLE 入门级别fd 背景知识学习：什么是FD, file descriptor 题目如下：123456Mommy! what is a file descriptor in Linux?* try to play the wargame your self but if you are ABSOLUTE beginner, follow this tu">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-11-07T04:00:00.000Z">
+<meta property="article:modified_time" content="2020-11-08T03:48:41.987Z">
+<meta property="article:author" content="Jiang Wei">
+<meta property="article:tag" content="ctf">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/11/07/2020-11-07-PWNCTF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>PWN CTF练习 | JWCESIGN</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">JWCESIGN</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Keep Going</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/07/2020-11-07-PWNCTF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Jiang Wei">
+      <meta itemprop="description" content="Stay health, not be fat">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWCESIGN">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PWN CTF练习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-07 12:00:00" itemprop="dateCreated datePublished" datetime="2020-11-07T12:00:00+08:00">2020-11-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-08 11:48:41" itemprop="dateModified" datetime="2020-11-08T11:48:41+08:00">2020-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ctf/" itemprop="url" rel="index"><span itemprop="name">ctf</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>“PWN CTF练习”</p>
+</blockquote>
+<h1 id="练习网站"><a href="#练习网站" class="headerlink" title="练习网站"></a>练习网站</h1><p><a target="_blank" rel="noopener" href="https://pwnable.kr/play.php">PWNABLE</a></p>
+<h2 id="入门级别"><a href="#入门级别" class="headerlink" title="入门级别"></a>入门级别</h2><h3 id="fd"><a href="#fd" class="headerlink" title="fd"></a>fd</h3><ul>
+<li>背景知识学习：<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/File_descriptor#:~:text=In%20Unix%20and%20related%20computer,the%20POSIX%20application%20programming%20interface.">什么是FD, file descriptor</a></li>
+<li>题目如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Mommy! what is a file descriptor in Linux?</span><br><span class="line"></span><br><span class="line">* try to play the wargame your self but if you are ABSOLUTE beginner, follow this tutorial link:</span><br><span class="line">https:&#x2F;&#x2F;youtu.be&#x2F;971eZhMHQQw</span><br><span class="line"></span><br><span class="line">ssh fd@pwnable.kr -p2222 (pw:guest)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h4><ol>
+<li>登陆机器，发现有fd.c, fd可执行文件，flag文件。首先当然是直接cat flag文件，发现没有权限。</li>
+<li>查看fd.c文件，发现是从句柄fd读入数据，只要读入的数据为LETMEWIN就能获得flag内容。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">char buf[32];</span><br><span class="line">int main(int argc, char* argv[], char* envp[])&#123;</span><br><span class="line">  if(argc&lt;2)&#123;</span><br><span class="line">    printf(&quot;pass argv[1] a number\n&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">  &#125;</span><br><span class="line">  int fd &#x3D; atoi( argv[1] ) - 0x1234;</span><br><span class="line">  int len &#x3D; 0;</span><br><span class="line">  len &#x3D; read(fd, buf, 32);</span><br><span class="line">  if(!strcmp(&quot;LETMEWIN\n&quot;, buf))&#123;</span><br><span class="line">    printf(&quot;good job :)\n&quot;);</span><br><span class="line">    system(&quot;&#x2F;bin&#x2F;cat flag&quot;);</span><br><span class="line">    exit(0);</span><br><span class="line">  &#125;</span><br><span class="line">  printf(&quot;learn about Linux file IO\n&quot;);</span><br><span class="line">  return 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>了解相关知识，文件句柄在linux用int类型表示，0表示STDIN,1表示STDOUT,2表示STDERR，所以，只要让其等于其值就可以了。</li>
+<li>所以直接运行./fd 4660就行，就能获取到flag。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fd@pwnable:~$ .&#x2F;fd 4660</span><br><span class="line">LETMEWIN</span><br><span class="line">good job :)</span><br><span class="line">mommy! I think I know what a file descriptor is!!</span><br><span class="line">fd@pwnable:~$</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="collision"><a href="#collision" class="headerlink" title="collision"></a>collision</h3><ul>
+<li>背景知识：<a href="link">md5碰撞</a></li>
+<li>题目如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Daddy told me about cool MD5 hash collision today.</span><br><span class="line">I wanna do something like that too!</span><br><span class="line"></span><br><span class="line">ssh col@pwnable.kr -p2222 (pw:guest)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="解题步骤-1"><a href="#解题步骤-1" class="headerlink" title="解题步骤"></a>解题步骤</h4><ol>
+<li><p>登陆机器，查看col.c</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">unsigned long hashcode &#x3D; 0x21DD09EC;</span><br><span class="line">unsigned long check_password(const char* p)&#123;</span><br><span class="line">  int* ip &#x3D; (int*)p;</span><br><span class="line">  int i;</span><br><span class="line">  int res&#x3D;0;</span><br><span class="line">  for(i&#x3D;0; i&lt;5; i++)&#123;</span><br><span class="line">    res +&#x3D; ip[i];</span><br><span class="line">  &#125;</span><br><span class="line">  return res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(int argc, char* argv[])&#123;</span><br><span class="line">  if(argc&lt;2)&#123;</span><br><span class="line">    printf(&quot;usage : %s [passcode]\n&quot;, argv[0]);</span><br><span class="line">    return 0;</span><br><span class="line">  &#125;</span><br><span class="line">  if(strlen(argv[1]) !&#x3D; 20)&#123;</span><br><span class="line">    printf(&quot;passcode length should be 20 bytes\n&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  if(hashcode &#x3D;&#x3D; check_password( argv[1] ))&#123;</span><br><span class="line">    system(&quot;&#x2F;bin&#x2F;cat flag&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">  &#125;</span><br><span class="line">  else</span><br><span class="line">    printf(&quot;wrong passcode.\n&quot;);</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>由题目知道，需要使char[20]转化为4个int后，值相加为hashcode。</p>
+</li>
+<li><p>此时可以这样，第一个char[4]为[0x21-4][0xdd-4][0x09-4][0xec-4],其他的都为\0x1\0x1\0x1\0x1，由于注意是小端系统，所以：<br>构造的值为：<code>\xe8\x05\xd9\x1d\1\1\1\1\1\1\1\1\1\1\1\1\1\1\1\1</code></p>
+</li>
+<li><p>利用python构造输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">col@pwnable:~$ .&#x2F;col &#96;python -c &#39;print &quot;\xe8\x05\xd9\x1d\1\1\1\1\1\1\1\1\1\1\1\1\1\1\1\1&quot;&#39;&#96;</span><br><span class="line">daddy! I just managed to create a hash collision :)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>最后的flag说，我成功创立了一个哈希碰撞！这其实也是这道题的本来用意：介绍哈希碰撞的概念和意义。首先我们来解释一下什么是哈希。哈希的英文是hash，就是将一个输入映射为独一无二、固定长度的值，也就是哈希值（hash value）。这个映射的最大意义在于，对于不同的输入，产生的哈希值理论上应该是不同的，这样就可以根据哈希值来识别不同的输入。</p>
+<p>但是实际上，很多哈希算法，都有可能出现这样一种现象，就是不同的输入得到了同一个哈希值。这种现象，就叫做“哈希碰撞”（hash collision）。这种现象造成的问题是，就像我们题中的代码一样，如果我们想要根据哈希值来判断对方持有的密码是不是与我们事先约定的一样，那么如果出现了哈希碰撞，这个密码就会变得不安全，因为对方很可能并不知道我们约定的密码，却可以通过碰撞找到另一个字符串，同样得到正确密码计算出来的哈希值，从而通过检查，就像我们解题的过程一样。</p>
+<p>哈希碰撞是黑客攻击常用的方法。由于哈希值广泛应用于安全验证当中，比如MD5算法用于检查文件完整性，如果文件被篡改，那么会导致哈希值不同，从而让使用者有所警觉，意识到文件可能被植入了木马或者有其他安全隐患。但如果黑客可以用一些方式，既篡改了文件，又能造成MD5算法的碰撞——也就是恰好产生与原文件同样的哈希值，那么就可以成功地开展一次攻击。山东大学的王小云教授，于2004年发现了在一些条件下制造MD5哈希碰撞的方法，某种程度上“重创”了算法的安全性，也让MD5算法逐渐退出了历史舞台，被更安全的哈希算法所取代。</p>
+<p>持续更新中…</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ctf/" rel="tag"># ctf</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/06/2020-09-06-NSAPro/" rel="prev" title="家庭版NAS">
+      <i class="fa fa-chevron-left"></i> 家庭版NAS
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0%E7%BD%91%E7%AB%99"><span class="nav-number">1.</span> <span class="nav-text">练习网站</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A5%E9%97%A8%E7%BA%A7%E5%88%AB"><span class="nav-number">1.1.</span> <span class="nav-text">入门级别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fd"><span class="nav-number">1.1.1.</span> <span class="nav-text">fd</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">解题步骤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#collision"><span class="nav-number">1.1.2.</span> <span class="nav-text">collision</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E6%AD%A5%E9%AA%A4-1"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">解题步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jiang Wei"
+      src="/images/header.jpg">
+  <p class="site-author-name" itemprop="name">Jiang Wei</p>
+  <div class="site-description" itemprop="description">Stay health, not be fat</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">[object Object]</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

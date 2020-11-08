@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="“DDS学习”  DDS学习概念DDS以数据为中心的发布一订阅模型为所有分布式节点之间建立了一个虚拟共享的“全局数据空间(Global Data Space, GDS)。在该模型下分布式节点在网络上以发布或订阅的方式传输数据，节点可以是发布者或订阅者，或者既是发布者又是订阅者。网络中的数据对象用主题((Topic)做标识，分布式节点在全局数据空间中发布或订阅感兴趣的主题信息。各个节点在逻辑上无主">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DDS学习">
+<meta property="og:url" content="http://example.com/2018/06/28/2018-07-14-dds/index.html">
+<meta property="og:site_name" content="JWCESIGN">
+<meta property="og:description" content="“DDS学习”  DDS学习概念DDS以数据为中心的发布一订阅模型为所有分布式节点之间建立了一个虚拟共享的“全局数据空间(Global Data Space, GDS)。在该模型下分布式节点在网络上以发布或订阅的方式传输数据，节点可以是发布者或订阅者，或者既是发布者又是订阅者。网络中的数据对象用主题((Topic)做标识，分布式节点在全局数据空间中发布或订阅感兴趣的主题信息。各个节点在逻辑上无主">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-e2811078ee8fbd3ab6397b848f9d3789_hd.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-284789ca930ec5a54744c6b5daafe65c_hd.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-22a3c208f82d52103c14d08af11b6673_hd.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-b92695d69cf98d66ec20293b02d11120_hd.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-cf2c0801b3a59b0174f03e4873c788f6_hd.jpg">
+<meta property="article:published_time" content="2018-06-28T04:00:00.000Z">
+<meta property="article:modified_time" content="2020-11-08T03:46:13.093Z">
+<meta property="article:author" content="Jiang Wei">
+<meta property="article:tag" content="dds">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-e2811078ee8fbd3ab6397b848f9d3789_hd.jpg">
+
+<link rel="canonical" href="http://example.com/2018/06/28/2018-07-14-dds/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>DDS学习 | JWCESIGN</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">JWCESIGN</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Keep Going</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2018/06/28/2018-07-14-dds/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Jiang Wei">
+      <meta itemprop="description" content="Stay health, not be fat">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWCESIGN">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DDS学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-06-28 12:00:00" itemprop="dateCreated datePublished" datetime="2018-06-28T12:00:00+08:00">2018-06-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-08 11:46:13" itemprop="dateModified" datetime="2020-11-08T11:46:13+08:00">2020-11-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9D%82/" itemprop="url" rel="index"><span itemprop="name">杂</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>“DDS学习”</p>
+</blockquote>
+<h1 id="DDS学习"><a href="#DDS学习" class="headerlink" title="DDS学习"></a>DDS学习</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>DDS以数据为中心的发布一订阅模型为所有分布式节点之间建立了一个虚拟共享的“全局数据空间(Global Data Space, GDS)。在该模型下分布式节点在网络上以发布或订阅的方式传输数据，节点可以是发布者或订阅者，或者既是发布者又是订阅者。网络中的数据对象用主题((Topic)做标识，分布式节点在全局数据空间中发布或订阅感兴趣的主题信息。各个节点在逻辑上无主从关系，点与点之间都是对等关系.通信方式可以是点对点、点对多、多对多等，在QoS的控制下建立连接，自动发现和配置网络参数,如下图<br><img src="https://pic4.zhimg.com/80/v2-e2811078ee8fbd3ab6397b848f9d3789_hd.jpg" alt="img"></p>
+<h2 id="DDS架构"><a href="#DDS架构" class="headerlink" title="DDS架构"></a>DDS架构</h2><p><img src="https://pic3.zhimg.com/80/v2-284789ca930ec5a54744c6b5daafe65c_hd.jpg" alt="img"><br>DDS规范有两层，分别是数据本地重构层DLRL（Data Local Reconstruction Layer)和以数据为中心的发布一订阅层DCPS（Data-Centric Publish-Subscribe）。DCPS层是DDS的核心和基础，提供了通信的基本服务；DLRL层将DCPS层提供的服务进行了抽象，在DLRL层建立了与底层服务的映射关系。</p>
+<h2 id="DDS域（Domain）和域参与者（Domain-Participant）"><a href="#DDS域（Domain）和域参与者（Domain-Participant）" class="headerlink" title="DDS域（Domain）和域参与者（Domain Participant）"></a>DDS域（Domain）和域参与者（Domain Participant）</h2><p><img src="https://pic4.zhimg.com/80/v2-22a3c208f82d52103c14d08af11b6673_hd.jpg" alt="img"></p>
+<h2 id="DDS组成模型"><a href="#DDS组成模型" class="headerlink" title="DDS组成模型"></a>DDS组成模型</h2><p>DDS内所有的成员都是Entity，DDS中的任两个Entity（实体角色）通信都必须在同一个Domain内进行交互，即他们初始化时DomainID是同一个，并且不同Domain的DomainID必须唯一。Domain内的DomainParticipant是服务的入口点，任何DDS应用都需首先获取DomainParticipant，然后通过Domain Participant获取其他服务，如Publisher、Subscriber、Topic等。<br><img src="https://pic4.zhimg.com/80/v2-b92695d69cf98d66ec20293b02d11120_hd.jpg" alt="img"></p>
+<h2 id="几个重要概念"><a href="#几个重要概念" class="headerlink" title="几个重要概念"></a>几个重要概念</h2><ul>
+<li>服务质量策略(QoS)。DDS规范定义了丰富的服务质量策略(Quality of Services Policies)，QoS是一种网络传输策略，应用程序指定所需要的网络传输质量行为，QoS服务实现这种行为要求，尽可能地满足客户对通信质量的需求，DDS定义QoS策略使其对复杂网络环境的适应性和鲁棒性大大增强，优化网络传输质量。QoS可以理解为数据提供者和接收者之间的合约。<br><img src="https://pic2.zhimg.com/80/v2-cf2c0801b3a59b0174f03e4873c788f6_hd.jpg" alt="img"></li>
+<li>Domain是一个范围概念，由域号(DomainID ) 唯一标示，只有在同一个域内的通信实体才能通信，不同域内的实体间无任何逻辑关系。</li>
+<li>Domain Participant作为数据分发服务的入口点，包含若干发布者、订阅者和注册主题，负责创建、删除和管理这些实体。</li>
+<li>Publisher作为发布者角色，至少包含一个DataWriter，并负责创建、删除和管理DataWriter。同样，Subscribe作为订阅角色，至少与一个DataReader关联，并负责创建、删除和管理DataReader。</li>
+<li>DataWriter具体负责发布数据，数据发布者通过调用DataWriter的write函数发布数据，但数据不会立刻被送出，实际的消息产生是通过Puhlisher和QoS综合控制的。</li>
+<li>DataReader负责订阅数据，订阅方式可采用异步方式(Listener)、同步方式(WaitSet)和非阻塞三种。</li>
+<li>Topic是DataWriter和DataReader相互通信时约定的主题，每个DataWriter/DataReader必须与一个主题绑定，相互通信的DataWriter与DataReader之间的主题数据类型必须相同、QoS必须匹配。另外，Topic必须有确定的数据类型。</li>
+</ul>
+<h2 id="DDS官方文档阅读"><a href="#DDS官方文档阅读" class="headerlink" title="DDS官方文档阅读"></a>DDS官方文档阅读</h2><ul>
+<li>The purpose of the DDS specification can be summarized as enabling the “Efficient and Robust Delivery of the Right<br>Information to the Right Place at the Right Time.”</li>
+</ul>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>OMG IDL Stubs and Skeletons(IDL stubs and skeletons serve as a “glue” between the client and servants, respectively, and the ORB),IDL Compiler(An IDL compiler transforms OMG IDL definitions into stubs and skeletons),Dynamic Invocation Interface(Dynamic Invocation Interface (DII): The DII allows clients to generate requests at run-time), Dynamic Skeleton Interface(The DSI allows an ORB to deliver requests to servants that have no compile-time knowledge of the IDL interface they implement), Object Adapter(Object Adapters enable ORBs to support various types of servants that possess similar requirements),Interface Repository(The Interface Repository provides run-time information about IDL interfaces),Implementation Repository(The Implementation Repository contains information that allows an ORB to activate servers to process servants).</p>
+<p>CORBA适用场景：RPC-style applications that possess “best-effort” quality of service (QoS) requirements.<br>CORBA不适用场景： high-performance, real-time applications for the fol- lowing reasons.<br>REASON:(1)Lack of QoS specification interfaces;(2)Lack of QoS enforcement;(3)Lack of real-time programming features:(4)Lack of performance optimizations;(5)</p>
+<h2 id="文档阅读"><a href="#文档阅读" class="headerlink" title="文档阅读"></a>文档阅读</h2><ol>
+<li>各膜的全称及作用</li>
+<li>1 AMQP: The Advanced Message Queuing Protocol<br>  作用: designed to address applications requiring fast and reliable business transactions.</li>
+<li>2 JMS: Java Message Service API<br>  作用:  designed to address applications requiring fast and reliable business transactions, JMS is focused on Java-centric systems  </li>
+<li>3 MQTT:  Message Queuing Telemetry Transport<br>  作用: provides a simple and lightweight device data collection solution</li>
+<li>4 REST: Representational state transfer<br>  作用:  provides a simple client-server (request/reply) style of communications that is useful for systems that need to communicate over the Internet, but it cannot provide asynchronous loosely coupled publish-and-subscribe message exchanges.<br>ahdjkahsdjhajkshdfjkhajkdfhakhfjkhajskdhfkashkdfhkasdfasd</li>
+</ol>
+<h2 id="7-29任务"><a href="#7-29任务" class="headerlink" title="7/29任务"></a>7/29任务</h2><p>消息中间件，实时系统，嵌入式，AI算子，</p>
+<h3 id="嵌入式-嵌入式"><a href="#嵌入式-嵌入式" class="headerlink" title="嵌入式,嵌入式"></a>嵌入式,嵌入式</h3><ul>
+<li>Dr. Basel Halak: <a target="_blank" rel="noopener" href="https://www.ecs.soton.ac.uk/people/bh9">link</a><ul>
+<li>嵌入式教授</li>
+<li>关注嵌入式安全和功耗</li>
+</ul>
+</li>
+<li>Professor Bashir Al-Hashimi: <a target="_blank" rel="noopener" href="https://www.ecs.soton.ac.uk/people/bmah#publications">link</a><ul>
+<li>嵌入式教授，比较牛</li>
+<li>关注嵌入式系统中的低功耗，如实时系统中的低功耗，关系power-efficient的论文较多</li>
+</ul>
+</li>
+</ul>
+<h2 id="Real-time比较"><a href="#Real-time比较" class="headerlink" title="Real-time比较"></a>Real-time比较</h2><p>TAO为满足QoS所做的操作：</p>
+<ol>
+<li>高速网路适配器：一个或多个ATM接口控制器芯片(APIC)互相连接而组成的菊花链 .APIC能作为一个系统/网络接口使用，也能作为I/O接口芯片组使用.</li>
+<li>实时I/O系统：通过避免优先级倒置来提高实时性，用一个核心线程池专用处理协议并且用应用程序的线程关联这些线程. 这些核心线程运行在与应用程序线程同样的优先级别, 这样能防止多种实时调度事故的发生如优先反演和隐藏调度.</li>
+<li>实时调度:TAO通过支持周期性实时应用程序的实时I/O调度类来确保支持QoS. 一旦实时I/O类的一个线程被操作系统接纳, 调度程序将负责(1) 计算在类中相关的其它线程的优先级并且(2)周期性地分发这些线程以使它们在最后期限是满足的.</li>
+<li>输入控制器:输入控制允许操作系统要么确保指定的计算时间，要么拒绝接收线程. 输入控制对于实时系统在确定和统计QoS需求方面很有用处.</li>
+<li>实时对象适配器:TAO使用de-分层多路分解 (Figure 4(B)).这种近似使用多路分解键(demultiplexing keys)的方式把ORB指派给客户端. 这些键映射客户请求到对象/操作在O(1)时间里不需要任何的哈西运算或搜索.<br><a target="_blank" rel="noopener" href="http://docs.huihoo.com/ace_tao/i/corba_demux2.gif">img</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/dds/" rel="tag"># dds</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/06/28/2018-08-12-cmake/" rel="prev" title="cmake学习">
+      <i class="fa fa-chevron-left"></i> cmake学习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/06/28/2018-06-27-gdb/" rel="next" title="gdb调试">
+      gdb调试 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DDS%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">DDS学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DDS%E6%9E%B6%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">DDS架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DDS%E5%9F%9F%EF%BC%88Domain%EF%BC%89%E5%92%8C%E5%9F%9F%E5%8F%82%E4%B8%8E%E8%80%85%EF%BC%88Domain-Participant%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">DDS域（Domain）和域参与者（Domain Participant）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DDS%E7%BB%84%E6%88%90%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.4.</span> <span class="nav-text">DDS组成模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E6%A6%82%E5%BF%B5"><span class="nav-number">1.5.</span> <span class="nav-text">几个重要概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DDS%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB"><span class="nav-number">1.6.</span> <span class="nav-text">DDS官方文档阅读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-number">1.7.</span> <span class="nav-text">补充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB"><span class="nav-number">1.8.</span> <span class="nav-text">文档阅读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-29%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.9.</span> <span class="nav-text">7&#x2F;29任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F-%E5%B5%8C%E5%85%A5%E5%BC%8F"><span class="nav-number">1.9.1.</span> <span class="nav-text">嵌入式,嵌入式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Real-time%E6%AF%94%E8%BE%83"><span class="nav-number">1.10.</span> <span class="nav-text">Real-time比较</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jiang Wei"
+      src="/images/header.jpg">
+  <p class="site-author-name" itemprop="name">Jiang Wei</p>
+  <div class="site-description" itemprop="description">Stay health, not be fat</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">[object Object]</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
